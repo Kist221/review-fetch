@@ -1,0 +1,46 @@
+<h1>Burger Bro's</h1>
+
+<img src="/assets/img/bob2.jpg" alt="Sterling Malory Archer || Bob" id="bobImg">
+
+<h2>Place Order</h2>
+
+<form class="create-form">
+  <div class="form-group">
+    <label for="newBurger">Burger:</label>
+    <input type="text" id="newBurger" name="name">
+  </div>
+  <button type="submit">Order</button>
+</form>
+
+<div id="created">
+  <div id="making">
+    <h2>Making Some Delicious Burgers!</h2>
+
+    <div>
+      {{#each burgers}}
+          {{#unless devoured}}
+    		  <h3 id="new-{{this.id}}">
+    		      • {{this.burger_name}}
+    		      <button data-burgerid="{{this.id}}" class="delBurger">Eat!</button>
+    		  </h3>
+          {{/unless}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div id="eating">
+    <h2>Those Were Delicious!</h2>
+
+    <div>
+      {{#each burgers}}
+          {{#if devoured}}
+    		    <h4 id="eaten">
+    		     • {{this.burger_name}}
+    		    </h4>
+          {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<h6>Thank you for choosing Burger Bro's! - Consuming undercooked meat is not recommended. <small>Except For Pam</small></h6>
