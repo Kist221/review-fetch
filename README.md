@@ -22,6 +22,6 @@ Customizable app for improving companies reputations.
 	- OPT IN further contact/feedback (for negative form)
 
 ## SAMPLE REVIEW URLS
-	• *Google* `https://www.google.com/search?source=hp&ei=QreRWqCVPMqgjwPT84PwBw&q=cs+design+studios&oq=cs+design+&gs_l=psy-ab.3.0.0l10.1020.1915.0.2666.11.7.0.2.2.0.178.839.4j3.7.0....0...1c.1.64.psy-ab..2.9.855.0..0i131k1j0i131i46k1j46i131k1.0.jUJ9WtfdjSM#lrd=0x86d66eff1714e775:0x8b275482698d0703,3,,,`
-	• *Yelp* `https://www.yelp.com/writeareview/biz/aSPHnb8ViWq7c6x6NDkatg?return_url=%2Fbiz%2FaSPHnb8ViWq7c6x6NDkatg`
-	• *BBB* `https://www.bbb.org/tucson/business-reviews/web-design/cs-design-studios-in-tucson-az-20024770/reviews-and-complaints/?review=true`
+	• **Google** `https://www.google.com/search?source=hp&ei=QreRWqCVPMqgjwPT84PwBw&q=cs+design+studios&oq=cs+design+&gs_l=psy-ab.3.0.0l10.1020.1915.0.2666.11.7.0.2.2.0.178.839.4j3.7.0....0...1c.1.64.psy-ab..2.9.855.0..0i131k1j0i131i46k1j46i131k1.0.jUJ9WtfdjSM#lrd=0x86d66eff1714e775:0x8b275482698d0703,3,,,`
+	• **Yelp** `https://www.yelp.com/writeareview/biz/aSPHnb8ViWq7c6x6NDkatg?return_url=%2Fbiz%2FaSPHnb8ViWq7c6x6NDkatg`
+	• **BBB** `https://www.bbb.org/tucson/business-reviews/web-design/cs-design-studios-in-tucson-az-20024770/reviews-and-complaints/?review=true`
