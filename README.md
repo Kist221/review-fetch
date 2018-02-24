@@ -7,6 +7,12 @@ Customizable app for improving companies reputations.
  	- Email Template Viewing
  	- Successful Email Send / Recieve
  	- Feedback Landing Pages (negative: internal form feedback| positive: direct reviews)
+### Pages
+	• Home/Dashboard - reviewfetch.com/# > Login Modal if not signed in
+		• Settings - reviewfetch.com/setup
+		• Manage Contact Data - reviewfetch.com/data
+		• Fetch Reviews Campaign Page - reviewfetch.com/fetch
+		• Analytics - reviewfetch.com/analytics
 
 ## Additional Needs
  	- Login Functionality
