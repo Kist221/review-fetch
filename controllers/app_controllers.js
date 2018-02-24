@@ -6,32 +6,29 @@ var router = express.Router();
 // Import the model to use its database functions.
 var model = require("../models/model.js");
 
-// Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
-	model.all(function(data) {
-		var allmodels = {
-			models: data
-		};
-		console.log(allmodels);
-		res.render("index", allmodels);
-	});
+// returns a list of contacts
+router.get("/api/contacts", function(req, res) {
+	
 });
 
-router.post("/add", function(req, res) {
-	var name = req.body.name.toString();
-	console.log("POST BODY: " + name);
-	model.insert(name, function(data) {
-		res.json(data);
-	});
+// add new user
+router.put("/api/new_contact", function(req, res) {
+	
 });
 
-router.put("/change", function(req, res) {
-	var id = req.body.id.toString();
-	console.log("PUT BODY: " + id);
-	model.update(id, function(data) {
-		res.json(data);
-	});
+/*
+router.get("/api/setup", function(req, res) {
+	
 });
+
+router.get("/api/fetch", function(req, res) {
+	
+});
+
+router.get("/api/analytics", function(req, res) {
+	
+});
+*/
 
 // Export routes for server.js to use.
 module.exports = router;
