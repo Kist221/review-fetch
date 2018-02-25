@@ -1,9 +1,15 @@
 // Import the ORM to create functions that will interact with the database.
 var orm = require("../config/orm.js");
 
-var contact = {
+var fetchUser = {
   selectAll: function(cb) {
     orm.selectAll("fetch_users", function(res) {
+      cb(res);
+    });
+  },
+  selectOne: function(col, value, cb) {
+    console.log(col, value);
+    orm.selectOne("fetch_users", col, value, function(res) {
       cb(res);
     });
   },
@@ -20,9 +26,15 @@ var contact = {
   }
 };
 
-var clientData = {
+var fetchClientData = {
   selectAll: function(cb) {
     orm.selectAll("fetch_client_data", function(res) {
+      cb(res);
+    });
+  },
+  selectOne: function(col, value, cb) {
+    console.log(col, value);
+    orm.selectOne("fetch_client_data", col, value, function(res) {
       cb(res);
     });
   },
@@ -39,9 +51,15 @@ var clientData = {
   }
 };
 
-var company = {
+var fetchCompany = {
   selectAll: function(cb) {
     orm.selectAll("fetch_company", function(res) {
+      cb(res);
+    });
+  },
+   selectOne: function(col, value, cb) {
+    console.log(col, value);
+    orm.selectOne("fetch_company", col, value, function(res) {
       cb(res);
     });
   },
@@ -60,4 +78,7 @@ var company = {
 
 
 // Export the database functions for the controller (burgersController.js).
-module.exports = {contact: contact, clientData: clientData, company: company} ;
+module.exports = {
+  fetchUser: fetchUser,
+  fetchClientData: fetchClientData, 
+  fetchCompany: fetchCompany} ;

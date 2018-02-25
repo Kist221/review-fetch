@@ -10,6 +10,14 @@ var orm = {
       cb(result);
     });
   },
+  selectOne: function(tableInput, colToSearch, valOfCol, cb) {
+    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
+    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      cb(result);
+    });
+  },
   insertOne: function(tableInput, itemInput, newItem, cb) {
     var queryString = "INSERT INTO ?? (??) VALUES (?)";
     connection.query(queryString, [tableInput, itemInput, newItem], function(err, result) {
