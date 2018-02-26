@@ -7,6 +7,8 @@ var routes = require("./controllers/app_controllers.js");
 var PORT = process.env.PORT || 3000;
 // start express
 var app = express();
+// Requiring our models for syncing
+var db = require("./models");
 // configure handlebars template
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -18,7 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Give the server access to routes
 app.use(routes);
-// start server (listening)
-app.listen(PORT, function() {
-  console.log("App now listening at localhost:" + PORT);
+
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+db.sequelize.sync().then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });

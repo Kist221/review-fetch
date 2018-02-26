@@ -3,78 +3,79 @@ var express = require("express");
 
 var router = express.Router();
 
-// Import the model to use its database functions.
-var model = require("../models/model.js");
+// Requiring our models
+var db = require("../models");
 
-// returns all users
+// Create all our routes and set up logic within those routes where required.
+
+// Returns all users
 router.get("/api/fetch_users", function(req, res) {
-	model.fetchUser.selectAll(function(data) {
-		var makeObject = {
-			data: data
-		};
-		console.log(data);
-		res.json(makeObject);
-	});
+	db.Users.findAll({
+      include: [db.Company]
+    }).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
 });
 
-// fetch one user by id
+// Fetch one user by id
 router.get("/api/fetch_users/:id", function(req, res) {
-	console.log(req.params.id);
-
-	model.fetchUser.selectOne("user_id", req.params.id, function(data) {
-		console.log(data);
-		res.json(data);
-	});
+	db.Users.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
 });
 
+// Creates a new user
 router.post("/api/fetch_users/new", function(req, res) {
-  console.log(req.body.username, req.body.password, req.body.bool);
-  model.fetchUser.insertOne(["username", "password", "bool"], [req.body.username, req.body.password, req.body.bool], function(result) {
-    // Send back the ID of the new burger
-    res.json({ id: result.insertId });
-  });
+  db.Users.create(req.body).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
 });
 
-// returns all data for all clients
+// Returns all data for all clients
+// TODO: Should probably filter by company
 router.get("/api/fetch_client_data", function(req, res) {
-	model.fetchClientData.selectAll(function(data) {
-		var makeObject = {
-			data: data
-		};
-		console.log(data);
-		res.json(makeObject);
-	});
+	db.Client.findAll()
+	  .then(function(dbClient) {
+      res.json(dbClient);
+    });
 });
 
-// fetch one client by id
+// Fetch one client by id
 router.get("/api/fetch_client_data/:id", function(req, res) {
-	console.log(req.params.id);
-
-	model.fetchClientData.selectOne("client_id", req.params.id, function(data) {
-		console.log(data);
-		res.json(data);
-	});
+	db.Client.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbClient) {
+      res.json(dbClient);
+    });
 });
 
-// returns all company data
+// Returns all company data
 router.get("/api/fetch_company", function(req, res) {
-	model.fetchCompany.selectAll(function(data) {
-		var makeObject = {
-			data: data
-		};
-		console.log(data);
-		res.json(makeObject);
-	});
+	db.Company.findAll({
+      include: [db.Client]
+    }).then(function(dbCompany) {
+      res.json(dbCompany);
+    });
 });
 
-// fetch one company by id
+// Fetch one company by id
 router.get("/api/fetch_company/:id", function(req, res) {
-	console.log(req.params.id);
-
-	model.fetchCompany.selectOne("id", req.params.id, function(data) {
-		console.log(data);
-		res.json(data);
-	});
+	db.Company.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Client]
+    }).then(function(dbCompany) {
+      res.json(dbCompany);
+    });
 });
 
 // Export routes for server.js to use.
