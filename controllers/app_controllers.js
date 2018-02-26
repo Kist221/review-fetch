@@ -9,40 +9,73 @@ var model = require("../models/model.js");
 // Create all our routes and set up logic within those routes where required.
 
 /* Home Page - Landing Page*/
-router.get("/", function(req, res) {
-	model.all(function(data) {
-		var allmodels = {
-			models: data
+// returns all users
+router.get("/api/fetch_users", function(req, res) {
+	model.fetchUser.selectAll(function(data) {
+		var makeObject = {
+			data: data
 		};
-		console.log(allmodels);
-		res.render("index", allmodels);
+		console.log(data);
+		res.json(makeObject);
 	});
 });
 
-/* Home Page - Dashboard*/
-router.get("/dashboard", function(req, res) {
-	model.all(function(data) {
-		var allmodels = {
-			models: data
-		};
-		console.log(allmodels);
-		res.render("index", allmodels);
-	});
-});
+// fetch one user by id
+router.get("/api/fetch_users/:id", function(req, res) {
+	console.log(req.params.id);
 
-/* Manual Entry of Contact */
-router.post("/add", function(req, res) {
-	var name = req.body.name.toString();
-	console.log("POST BODY: " + name);
-	model.insert(name, function(data) {
+	model.fetchUser.selectOne("user_id", req.params.id, function(data) {
+		console.log(data);
 		res.json(data);
 	});
 });
 
-router.put("/change", function(req, res) {
-	var id = req.body.id.toString();
-	console.log("PUT BODY: " + id);
-	model.update(id, function(data) {
+router.post("/api/fetch_users/new", function(req, res) {
+  console.log(req.body.username, req.body.password, req.body.bool);
+  model.fetchUser.insertOne(["username", "password", "bool"], [req.body.username, req.body.password, req.body.bool], function(result) {
+    // Send back the ID of the new burger
+    res.json({ id: result.insertId });
+  });
+});
+
+// returns all data for all clients
+router.get("/api/fetch_client_data", function(req, res) {
+	model.fetchClientData.selectAll(function(data) {
+		var makeObject = {
+			data: data
+		};
+		console.log(data);
+		res.json(makeObject);
+	});
+});
+
+// fetch one client by id
+router.get("/api/fetch_client_data/:id", function(req, res) {
+	console.log(req.params.id);
+
+	model.fetchClientData.selectOne("client_id", req.params.id, function(data) {
+		console.log(data);
+		res.json(data);
+	});
+});
+
+// returns all company data
+router.get("/api/fetch_company", function(req, res) {
+	model.fetchCompany.selectAll(function(data) {
+		var makeObject = {
+			data: data
+		};
+		console.log(data);
+		res.json(makeObject);
+	});
+});
+
+// fetch one company by id
+router.get("/api/fetch_company/:id", function(req, res) {
+	console.log(req.params.id);
+
+	model.fetchCompany.selectOne("id", req.params.id, function(data) {
+		console.log(data);
 		res.json(data);
 	});
 });
