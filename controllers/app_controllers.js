@@ -7,6 +7,8 @@ var router = express.Router();
 var model = require("../models/model.js");
 
 // Create all our routes and set up logic within those routes where required.
+
+/* Home Page - Landing Page*/
 router.get("/", function(req, res) {
 	model.all(function(data) {
 		var allmodels = {
@@ -17,6 +19,18 @@ router.get("/", function(req, res) {
 	});
 });
 
+/* Home Page - Dashboard*/
+router.get("/dashboard", function(req, res) {
+	model.all(function(data) {
+		var allmodels = {
+			models: data
+		};
+		console.log(allmodels);
+		res.render("index", allmodels);
+	});
+});
+
+/* Manual Entry of Contact */
 router.post("/add", function(req, res) {
 	var name = req.body.name.toString();
 	console.log("POST BODY: " + name);
