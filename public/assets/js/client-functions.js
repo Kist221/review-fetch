@@ -54,7 +54,7 @@ $("#new-client-addbtn").on("click", handleFormSubmit);
         phone: phone
             .val()
             .trim(),
-        CompanyId: 5
+        CompanyId: 1
     };
 
     submitPost(newClient);
