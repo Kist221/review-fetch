@@ -8,7 +8,11 @@ var db = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
 
-/* SEEDS for DB */
+/**********************
+ *                    *
+ *    SEEDS for DB    *
+ *                    *
+ **********************/
 router.get("/seedUser", function(req, res) {
   // Create a User
  db.Users.create({
@@ -29,6 +33,11 @@ router.get("/seedCompany", function(req, res) {
       res.json(dbCompany);
     });
 });
+/*************************
+ *                       *
+ *   END SEEDS for DB    *
+ *                       *
+ *************************/
 
 // Home page/ Dashboard
 // This will eventually be a Landing Page
@@ -40,6 +49,11 @@ router.get("/", function(req, res) {
 // Dashboard Page
 router.get("/dashboard", function(req, res) {
   res.render("dashboard");
+});
+
+// Email Templates Page
+router.get("/templates", function(req, res) {
+  res.render("templates");
 });
 
 // Client List Page
