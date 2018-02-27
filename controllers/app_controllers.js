@@ -51,6 +51,11 @@ router.get("/dashboard", function(req, res) {
   res.render("dashboard");
 });
 
+// Fetch Reviews Page
+router.get("/fetch", function(req, res) {
+  res.render("fetch");
+});
+
 // Email Templates Page
 router.get("/templates", function(req, res) {
   res.render("templates");
