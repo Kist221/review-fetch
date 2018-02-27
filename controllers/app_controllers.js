@@ -1,5 +1,7 @@
 // requirement
 var express = require("express");
+// This is the package we're using for sending email (for now)
+var nodeMailer = require("nodemailer");
 
 var router = express.Router();
 
@@ -67,6 +69,26 @@ router.get("/clients", function(req, res) {
     .then(function(dbClient) {
       res.render("client-list", {clients: dbClient});
     });
+});
+
+// Sends an email with options defined in the req.body
+router.post("/api/send_email", function(req, res) {
+  // The email to use in sending the email
+  //(@ symbol changed to %40)
+  var sender = 'smtps://testfetchreview%40gmail.com';
+  // Password of the email to use
+  var password = 'fetchreview';
+
+  // To send emails you need a transporter object
+  var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
+
+  // We now send the message
+  transporter.sendMail(req.body, function(err, response) {
+    if(err) {
+      console.log(err);
+    }
+    res.json(response);
+  })
 });
 
 // Returns all users
