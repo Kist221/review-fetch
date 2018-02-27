@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "itwhdy1bofp9hasx",
-    "password": "xo6qjlnrtojm7dee",
+    "username": "root",
+    "password": null,
     "database": "review_fetch",
-    "host": "d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
