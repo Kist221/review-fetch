@@ -75,9 +75,9 @@ router.get("/clients", function(req, res) {
 router.post("/api/send_email", function(req, res) {
   // The email to use in sending the email
   //(@ symbol changed to %40)
-  var sender = 'smtps://testfetchreview%40gmail.com';
+  var sender = 'smtps://ReviewFetch%40gmail.com';
   // Password of the email to use
-  var password = 'fetchreview';
+  var password = 'ReviewFetch2018';
 
   // To send emails you need a transporter object
   var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
