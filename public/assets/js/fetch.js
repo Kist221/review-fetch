@@ -61,10 +61,13 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Get the selected contact
 		var to = JSON.parse(contactListSelect.val());
-		// Get the selected template and decode the URI
+		// Get the selected template and parse string template
 		var template = JSON.parse(templateListSelect.val());
-		// Parse the string template
+		// Decode the URI
 		template = decodeURI(template);
+		// Escape the quotes
+		template = template.replace(/(['"])/g, "\\$1");
+
 		
 		// add 'to' property to the message
 		data.to = to.email;
