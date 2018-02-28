@@ -20,9 +20,7 @@ $(document).ready(function(){
 		}
 	}
 	var data = {
-	    from: 'testfetchreview@gmail.com',
-	    subject: 'Message title',
-	    text: 'Plaintext version of the message'
+	    from: 'testfetchreview@gmail.com'
 	};
 
 	// Populate the Contact List dropdown
@@ -40,6 +38,21 @@ $(document).ready(function(){
 		contactListSelect.html(selectOptions);
 	});
 
+	// Populate the Contact List dropdown
+	var templateListSelect = $("#select-template");
+	// GET the templates
+	$.get("/api/fetch_templates", function() {
+		console.log("getting clients...");
+	}).done(function(res){
+		var selectOptions = "";
+		// Dynamically add each options for the templates list dropdown
+		for(var i = 0; i < res.length; i++) {
+			selectOptions += "<option value='" + JSON.stringify(res[i]) + "'>" + res[i].name + "</option>";
+		}
+		// Append the options to the templates list
+		templateListSelect.html(selectOptions);
+	});
+
 	// Attach the event listener on form submit
 	$("#email-send").on("submit", handleFormSubmit);
 
@@ -48,8 +61,12 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Get the selected contact
 		var to = JSON.parse(contactListSelect.val());
+		// Get the selected template
+		var template = JSON.parse(templateListSelect.val());
 		// add 'to' property to the message
 		data.to = to.email;
+		data.subject = template.subject;
+		data.text = template.message;
 
 		// POST request sending the data which defines the mail content
 		$.post("/api/send_email", data, function() {

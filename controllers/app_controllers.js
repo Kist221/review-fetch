@@ -119,6 +119,15 @@ router.post("/api/fetch_templates/new", function(req, res) {
     });
 });
 
+// Returns all data for all clients
+// TODO: Should probably filter by company
+router.get("/api/fetch_templates", function(req, res) {
+  db.Template.findAll()
+    .then(function(dbTemplates) {
+      res.json(dbTemplates);
+    });
+});
+
 // Creates a new user
 router.post("/api/fetch_users/new", function(req, res) {
   db.Users.create(req.body).then(function(dbUsers) {
