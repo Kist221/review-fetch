@@ -40,6 +40,11 @@ $(document).ready(function(){
 		// Get the contents of the text area
 		var contentOfNewTemplate = templateTextArea.val().trim();
 
+		// Sanitize the subject
+		subjectOfNewTemplate = encodeURI(subjectOfNewTemplate);
+		// Sanitize the contents
+		contentOfNewTemplate = encodeURI(contentOfNewTemplate);
+
 		var newTemplate = {
 			name: nameOfNewTemplate,
 			subject: subjectOfNewTemplate,
