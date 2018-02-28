@@ -22,8 +22,7 @@ $(document).ready(function(){
 	var data = {
 	    from: 'testfetchreview@gmail.com',
 	    subject: 'Message title',
-	    text: 'Plaintext version of the message',
-	    html: '<p>HTML version of the message</p>'
+	    text: 'Plaintext version of the message'
 	};
 
 	// Populate the Contact List dropdown

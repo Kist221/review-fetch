@@ -100,12 +100,28 @@
                                 <h4 class="title">Edit Email Template</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form id="template-form">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Template 1</label>
-                                                <textarea rows="10" class="form-control border-input" placeholder="Write your template here."></textarea>
+                                                <label>Template Name</label>
+                                                <input id="template-name" type="text" class="form-control border-input" placeholder="Template Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Template Subject</label>
+                                                <input id="template-subject" type="text" class="form-control border-input" placeholder="Subject">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Template Body</label>
+                                                <textarea id="template-textarea" rows="10" class="form-control border-input" placeholder="Write your template here."></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -152,3 +168,6 @@
 
     </div>
 </div>
+
+<!-- Manage Template page methods -->
+<script src="assets/js/manage-template.js"></script>

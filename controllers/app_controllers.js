@@ -112,6 +112,13 @@ router.get("/api/fetch_users/:id", function(req, res) {
     });
 });
 
+// Creates a new template
+router.post("/api/fetch_templates/new", function(req, res) {
+  db.Template.create(req.body).then(function(dbTemplates) {
+      res.json(dbTemplates);
+    });
+});
+
 // Creates a new user
 router.post("/api/fetch_users/new", function(req, res) {
   db.Users.create(req.body).then(function(dbUsers) {
