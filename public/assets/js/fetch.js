@@ -62,9 +62,9 @@ $(document).ready(function(){
 		// Get the selected contact
 		var to = JSON.parse(contactListSelect.val());
 		// Get the selected template and decode the URI
-		var template = decodeURI(templateListSelect.val());
+		var template = JSON.parse(templateListSelect.val());
 		// Parse the string template
-		template = JSON.parse(template);
+		template = decodeURI(template);
 		
 		// add 'to' property to the message
 		data.to = to.email;
