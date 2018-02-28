@@ -20,7 +20,7 @@ $(document).ready(function(){
 		}
 	}
 	var data = {
-	    from: 'testfetchreview@gmail.com'
+	    from: 'ReviewFetch@gmail.com'
 	};
 
 	// Populate the Contact List dropdown
@@ -42,7 +42,7 @@ $(document).ready(function(){
 	var templateListSelect = $("#select-template");
 	// GET the templates
 	$.get("/api/fetch_templates", function() {
-		console.log("getting clients...");
+		console.log("getting templates...");
 	}).done(function(res){
 		var selectOptions = "";
 		// Dynamically add each options for the templates list dropdown
