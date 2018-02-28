@@ -47,7 +47,7 @@ $(document).ready(function(){
 		var selectOptions = "";
 		// Dynamically add each options for the templates list dropdown
 		for(var i = 0; i < res.length; i++) {
-			selectOptions += "<option value='" + JSON.stringify(res[i]) + "'>" + res[i].name + "</option>";
+			selectOptions += "<option value='" + res[i].id + "'>" + res[i].name + "</option>";
 		}
 		// Append the options to the templates list
 		templateListSelect.html(selectOptions);
@@ -61,22 +61,22 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Get the selected contact
 		var to = JSON.parse(contactListSelect.val());
-		// Get the selected template and parse string template
-		var template = JSON.parse(templateListSelect.val());
-		// Decode the URI
-		template = decodeURI(template);
-		// Escape the quotes
-		template = template.replace(/(['"])/g, "\\$1");
+		// Get the selected template and decode the URI
+		$.get("/api/fetch_templates/" + templateListSelect.val(), function() {
+			console.log("Getting template id#" + templateListSelect.val());
+		}).done(function(res) {
+			var template = decodeURI(JSON.stringify(res));
+			// Parse the string template
+			template = JSON.parse(template);
+			// add 'to' property to the message
+			data.to = to.email;
+			data.subject = template.subject;
+			data.text = template.message;
 
-		
-		// add 'to' property to the message
-		data.to = to.email;
-		data.subject = template.subject;
-		data.text = template.message;
-
-		// POST request sending the data which defines the mail content
-		$.post("/api/send_email", data, function() {
-			console.log("Sending email...");
+			// POST request sending the data which defines the mail content
+			$.post("/api/send_email", data, function() {
+				console.log("Sending email...");
+			});
 		});
 	}
 

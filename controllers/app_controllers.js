@@ -128,6 +128,18 @@ router.get("/api/fetch_templates", function(req, res) {
     });
 });
 
+// Fetch one template by id
+router.get("/api/fetch_templates/:id", function(req, res) {
+  db.Template.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbTemplates) {
+      res.json(dbTemplates);
+    });
+});
+
 // Creates a new user
 router.post("/api/fetch_users/new", function(req, res) {
   db.Users.create(req.body).then(function(dbUsers) {
