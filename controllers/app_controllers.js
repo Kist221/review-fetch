@@ -53,6 +53,11 @@ router.get("/dashboard", function(req, res) {
   res.render("dashboard");
 });
 
+// Settings Page
+router.get("/settings", function(req, res) {
+  res.render("settings");
+});
+
 // Fetch Reviews Page
 router.get("/fetch", function(req, res) {
   res.render("fetch");
