@@ -65,13 +65,16 @@ $(document).ready(function(){
 		$.get("/api/fetch_templates/" + templateListSelect.val(), function() {
 			console.log("Getting template id#" + templateListSelect.val());
 		}).done(function(res) {
-			var template = decodeURI(JSON.stringify(res));
-			// Parse the string template
-			template = JSON.parse(template);
+			console.log(res);
+			// var template = ``;
+			// template += decodeURI(JSON.stringify(res));
+			// console.log(template);
+			// // Parse the string template
+			// template = JSON.parse(template);
 			// add 'to' property to the message
 			data.to = to.email;
-			data.subject = template.subject;
-			data.text = template.message;
+			data.subject = decodeURI(res.subject);
+			data.html = decodeURI(res.message);
 
 			// POST request sending the data which defines the mail content
 			$.post("/api/send_email", data, function() {
