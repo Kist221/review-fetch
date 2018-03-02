@@ -25,9 +25,9 @@ $(document).ready(function(){
 
 	// Populate the Contact List dropdown
 	var contactListSelect = $("#select-contact-list");
-	// GET the contacts (clients for now)
-	$.get("/api/fetch_client_data", function() {
-		console.log("getting clients...");
+	// GET the contacts (contacts for now)
+	$.get("/api/fetch_contact_data", function() {
+		console.log("getting contacts...");
 	}).done(function(res){
 		var selectOptions = "";
 		// Dynamically add each options for the Contact List dropdown

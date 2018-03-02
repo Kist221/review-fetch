@@ -30,7 +30,7 @@
                 <li  class="active">
                     <a href="#">
                         <i class="ti-view-list-alt"></i>
-                        <p>Client List</p>
+                        <p>Contact List</p>
                     </a>
                 </li>
                 <li>
@@ -53,7 +53,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <p class="navbar-brand">Client List</p>
+                    <p class="navbar-brand">Contact List</p>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -96,7 +96,7 @@
                 <!-- Button Row -->
                 <div class="row">
                     <div class="col-md-12" style="margin-bottom: 2rem;">
-                        <button class="btn btn-primary btn-lg btn-fill" data-toggle="modal" data-target="#newClientModal">Add New Contact</button>
+                        <button class="btn btn-primary btn-lg btn-fill" data-toggle="modal" data-target="#newContactModal">Add New Contact</button>
                     </div>
                 </div>
                 <!-- END Button Row -->
@@ -117,7 +117,7 @@
                                         <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        {{#each clients}}
+                                        {{#each contacts}}
                                             <tr>
                                                 <td>{{this.name}}</td>
                                                 <td>{{this.email}}</td>
@@ -167,13 +167,13 @@
     </div>
 </div>
 
-<!-- New Client Modal -->
-<div class="modal fade" id="newClientModal" tabindex="-1" role="dialog" aria-labelledby="newClientModalLabel" aria-hidden="true">
+<!-- New Contact Modal -->
+<div class="modal fade" id="newContactModal" tabindex="-1" role="dialog" aria-labelledby="newContactModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="newClientModalLabel">New Contact</h4>
+        <h4 class="modal-title" id="newContactModalLabel">New Contact</h4>
       </div>
       <div class="modal-body">
         <form>
@@ -181,13 +181,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Company</label>
-                        <input id="new-client-company" type="text" class="form-control border-input" placeholder="Company">
+                        <input id="new-contact-company" type="text" class="form-control border-input" placeholder="Company">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Contact List</label>
-                        <input id="new-client-contactlist" type="text" class="form-control border-input" placeholder="Contact List">
+                        <input id="new-contact-contactlist" type="text" class="form-control border-input" placeholder="Contact List">
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                 <div class="col-md-12">
                      <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input id="new-client-email" type="email" class="form-control border-input" placeholder="Email">
+                        <input id="new-contact-email" type="email" class="form-control border-input" placeholder="Email">
                     </div>
                 </div>
             </div>
@@ -204,13 +204,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input id="new-client-firstname" type="text" class="form-control border-input" placeholder="First Name">
+                        <input id="new-contact-firstname" type="text" class="form-control border-input" placeholder="First Name">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input id="new-client-lastname" type="text" class="form-control border-input" placeholder="Last Name">
+                        <input id="new-contact-lastname" type="text" class="form-control border-input" placeholder="Last Name">
                     </div>
                 </div>
             </div>
@@ -219,7 +219,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Gender</label>
-                        <select id="new-client-gender" class="form-control border-input">
+                        <select id="new-contact-gender" class="form-control border-input">
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                           <option value="none">No Answer</option>
@@ -229,7 +229,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Phone</label>
-                        <input id="new-client-phone" type="text" class="form-control border-input" placeholder="(xxx)-xxx-xxxx">
+                        <input id="new-contact-phone" type="text" class="form-control border-input" placeholder="(xxx)-xxx-xxxx">
                     </div>
                 </div>
             </div>
@@ -237,7 +237,7 @@
       </div>
       <div class="modal-footer">
         <div class="left-side">
-            <button id="new-client-addbtn" type="button" class="btn btn-default btn-simple" data-dismiss="modal">Add Client</button>
+            <button id="new-contact-addbtn" type="button" class="btn btn-default btn-simple" data-dismiss="modal">Add Contact</button>
         </div>
         <div class="divider"></div>
         <div class="right-side">
@@ -247,7 +247,7 @@
     </div>
   </div>
 </div>
-<!-- END New Client Modal -->
+<!-- END New Contact Modal -->
 
-<!-- Client page methods -->
-<script src="assets/js/client-functions.js"></script>
+<!-- Contact page methods -->
+<script src="assets/js/contact-functions.js"></script>

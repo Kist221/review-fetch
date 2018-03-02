@@ -61,12 +61,12 @@ describe("review-fetch", function() {
       });
   });
 
-  it("should send user to the clients page", function(done) {
+  it("should send user to the contacts page", function(done) {
     // ID for the login button.
     Nightmare({ show: true })
       .goto("https://damp-fjord-98999.herokuapp.com/")
       // Click the fetch reviews link
-      .click("a[href='/clients']")
+      .click("a[href='/contacts']")
       // Evaluate the navbar-brand name
       .evaluate(function() {
         var name = document.getElementsByClassName("navbar-brand")[0].innerText;
@@ -74,7 +74,7 @@ describe("review-fetch", function() {
       })
       // compare the name returned to the expected
       .then(function(name) {
-        expect(name).to.equal("Client List");
+        expect(name).to.equal("Contact List");
         done();
       });
   });

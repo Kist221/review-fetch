@@ -63,11 +63,11 @@ router.get("/templates", function(req, res) {
   res.render("templates");
 });
 
-// Client List Page
-router.get("/clients", function(req, res) {
-  db.Client.findAll()
-    .then(function(dbClient) {
-      res.render("client-list", {clients: dbClient});
+// Contact List Page
+router.get("/contacts", function(req, res) {
+  db.Contact.findAll()
+    .then(function(dbContact) {
+      res.render("contact-list", {contacts: dbContact});
     });
 });
 
@@ -119,7 +119,7 @@ router.post("/api/fetch_templates/new", function(req, res) {
     });
 });
 
-// Returns all data for all clients
+// Returns all data for all contacts
 // TODO: Should probably filter by company
 router.get("/api/fetch_templates", function(req, res) {
   db.Template.findAll()
@@ -147,31 +147,31 @@ router.post("/api/fetch_users/new", function(req, res) {
     });
 });
 
-// Returns all data for all clients
+// Returns all data for all contacts
 // TODO: Should probably filter by company
-router.get("/api/fetch_client_data", function(req, res) {
-	db.Client.findAll()
-	  .then(function(dbClient) {
-      res.json(dbClient);
+router.get("/api/fetch_contact_data", function(req, res) {
+	db.Contact.findAll()
+	  .then(function(dbContact) {
+      res.json(dbContact);
     });
 });
 
-// Fetch one client by id
-router.get("/api/fetch_client_data/:id", function(req, res) {
-	db.Client.findOne({
+// Fetch one contact by id
+router.get("/api/fetch_contact_data/:id", function(req, res) {
+	db.Contact.findOne({
       where: {
         id: req.params.id
       },
       include: [db.Company]
-    }).then(function(dbClient) {
-      res.json(dbClient);
+    }).then(function(dbContact) {
+      res.json(dbContact);
     });
 });
 
-// Creates a new client
-router.post("/api/fetch_client_data/new", function(req, res) {
+// Creates a new contact
+router.post("/api/fetch_contact_data/new", function(req, res) {
   console.log(req.body);
-  db.Client.create(req.body).then(function(dbUsers) {
+  db.Contact.create(req.body).then(function(dbUsers) {
       res.json(dbUsers);
     });
 });
@@ -179,7 +179,7 @@ router.post("/api/fetch_client_data/new", function(req, res) {
 // Returns all company data
 router.get("/api/fetch_company", function(req, res) {
 	db.Company.findAll({
-      include: [db.Client]
+      include: [db.Contact]
     }).then(function(dbCompany) {
       res.json(dbCompany);
     });
@@ -191,7 +191,7 @@ router.get("/api/fetch_company/:id", function(req, res) {
       where: {
         id: req.params.id
       },
-      include: [db.Client]
+      include: [db.Contact]
     }).then(function(dbCompany) {
       res.json(dbCompany);
     });

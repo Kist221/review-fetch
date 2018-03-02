@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
-    // Associating Clients with Companies
-    Company.hasMany(models.Client);
+    // Associating Contacts with Companies
+    Company.hasMany(models.Contact);
   };
 
   return Company;

@@ -17,13 +17,13 @@ CREATE TABLE fetch_company(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE fetch_client_data(
-	client_id int NOT NULL AUTO_INCREMENT,
+CREATE TABLE fetch_contact_data(
+	contact_id int NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	gender BOOLEAN,
 	email varchar(255) NOT NULL,
 	phone varchar(20),
-	PRIMARY KEY (client_id),
+	PRIMARY KEY (contact_id),
     user_id int NOT NULL,
     FOREIGN KEY FK_userId (user_id)
     REFERENCES fetch_users(user_id)

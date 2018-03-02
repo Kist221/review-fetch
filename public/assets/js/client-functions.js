@@ -1,13 +1,13 @@
 $(document).ready(function() {
 type = ['','info','success','warning','danger'];
 
-clientFunctions = {
+contactFunctions = {
     showNotification: function(from, align){
     var color = 2;
 
     	$.notify({
         	icon: "ti-check",
-        	message: "<b>Client successfully added!</b>"
+        	message: "<b>Contact successfully added!</b>"
 
         },{
             type: type[color],
@@ -20,15 +20,15 @@ clientFunctions = {
 	}
 }
 
-var company = $("#new-client-company");
-var contactlist = $("#new-client-contactlist");
-var email = $("#new-client-email");
-var firstname = $("#new-client-firstname");
-var lastname = $("#new-client-lastname");
-var gender = $("#new-client-gender");
-var phone = $("#new-client-phone");
+var company = $("#new-contact-company");
+var contactlist = $("#new-contact-contactlist");
+var email = $("#new-contact-email");
+var firstname = $("#new-contact-firstname");
+var lastname = $("#new-contact-lastname");
+var gender = $("#new-contact-gender");
+var phone = $("#new-contact-phone");
 
-$("#new-client-addbtn").on("click", handleFormSubmit);
+$("#new-contact-addbtn").on("click", handleFormSubmit);
 
 // A function for handling what happens when the form to create a new post is submitted
   function handleFormSubmit(event) {
@@ -43,8 +43,8 @@ $("#new-client-addbtn").on("click", handleFormSubmit);
         gender = 1;
     }
 
-    // Constructing a newClient object to hand to the database
-    var newClient = {
+    // Constructing a newContact object to hand to the database
+    var newContact = {
         name: fullName
             .trim(),
         gender: gender,
@@ -57,15 +57,15 @@ $("#new-client-addbtn").on("click", handleFormSubmit);
         CompanyId: 1
     };
 
-    submitPost(newClient);
+    submitPost(newContact);
   }
 
-  // Submits a new client and shows a notification upon completion
-  function submitPost(client) {
+  // Submits a new contact and shows a notification upon completion
+  function submitPost(contact) {
     console.log("Posting");
-    $.post("/api/fetch_client_data/new", client, function() {
-        clientFunctions.showNotification('top','center');
-        setTimeout(function(){ window.location.href='/clients'; }, 5000);
+    $.post("/api/fetch_contact_data/new", contact, function() {
+        contactFunctions.showNotification('top','center');
+        setTimeout(function(){ window.location.href='/contacts'; }, 5000);
     });
   }
   });
