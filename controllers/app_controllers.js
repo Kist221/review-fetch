@@ -229,6 +229,18 @@ router.get("/api/fetch_contact_data/:id", function(req, res) {
     });
 });
 
+// Fetch one contact by name
+router.get("/api/fetch_contact_data/name/:name", function(req, res) {
+  db.Contact.findOne({
+      where: {
+        name: req.params.name
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
 // Creates a new contact
 router.post("/api/fetch_contact_data/new", function(req, res) {
   console.log(req.body);

@@ -10,9 +10,9 @@ html
       link(rel="stylesheet", href="style.css", data-inline)
   body
     h1 Hi #{name},
-    p This is just an html test. Click on this happy link:
     |
-    |
+    p Click on this happy link:
     a(href='http://localhost:3000/api/fetch_contact_data/' + uid) Happy
+    |
     p Or this sad link...
     a(href='http://localhost:3000/api/fetch_contact_data/' + uid) Sad    

@@ -3,6 +3,8 @@ const nodeMailer = require("nodemailer");
 
 // NOTE! - Must run test from within directory. 
 
+const sendEmail = function(to, name, uid) {
+
 // Password of the email to use
 var password = 'ReviewFetch2018';
 
@@ -30,12 +32,21 @@ email
   .send({
     template: 'parts',
     message: {
-      to: 'kist221@gmail.com' //change to test with your own email
+      to: to //change to test with your own email
     },
     locals: {
-      name: 'Dillon',
-      uid: 1
+      name: name,
+      uid: uid
     }
   })
   .then(console.log)
   .catch(console.error);
+
+};
+
+// Testing
+// sendEmail("kist221@gmail.com", "Test1", 1);
+// sendEmail("kist221@ymail.com", "TestTwo", 3);
+
+// Export emailer function
+module.exports = sendEmail;
