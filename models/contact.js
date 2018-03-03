@@ -28,12 +28,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
 
-    // status - Not Sent: a review request was not sent
-    // status - Sent: a review request was sent
-    // status - Replied: the contact submitted a review
+    // status - 0: a review request was not sent
+    // status - 1: a review request was sent
+    // status - 2: the contact submitted a review
     status: {
-      type: DataTypes.ENUM,
-      values: ['Not Sent', 'Sent', 'Replied']
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
 
     // is the contact still active
@@ -56,3 +56,4 @@ module.exports = function(sequelize, DataTypes) {
 
   return Contact;
 };
+

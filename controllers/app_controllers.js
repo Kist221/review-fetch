@@ -176,6 +176,47 @@ router.get("/api/fetch_contact_data/company/:id", function(req, res) {
     });
 });
 
+// Returns all data for contacts where active = 0 or 1
+router.get("/api/fetch_contact_data/active/:active", function(req, res) {
+  console.log(req.params);
+  db.Contact.findAll({
+    where: {
+      active: req.params.active
+    },
+    include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+// Returns all data for contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "true"
+router.get("/api/fetch_contact_data/status_and_active/:status", function(req, res) {
+  console.log(req.params);
+  db.Contact.findAll({
+    where: {
+      status: req.params.status,
+      active: 1
+    },
+    include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+// Returns all data for contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "false"
+router.get("/api/fetch_contact_data/status_and_active/:status", function(req, res) {
+  console.log(req.params);
+  db.Contact.findAll({
+    where: {
+      status: req.params.status,
+      active: 1
+    },
+    include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
 // Fetch one contact by id
 router.get("/api/fetch_contact_data/:id", function(req, res) {
 	db.Contact.findOne({
