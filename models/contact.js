@@ -26,7 +26,22 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len:[10,20]
       }
-    }
+    },
+
+    // status - 0: a review request was not sent
+    // status - 1: a review request was sent
+    // status - 2: the contact submitted a review
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+
+    // is the contact still active
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+
   });
 
   Contact.associate = function(models) {
@@ -41,3 +56,4 @@ module.exports = function(sequelize, DataTypes) {
 
   return Contact;
 };
+
