@@ -26,7 +26,22 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len:[10,20]
       }
-    }
+    },
+
+    // status - Not Sent: a review request was not sent
+    // status - Sent: a review request was sent
+    // status - Replied: the contact submitted a review
+    status: {
+      type: DataTypes.ENUM,
+      values: ['Not Sent', 'Sent', 'Replied']
+    },
+
+    // is the contact still active
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+
   });
 
   Contact.associate = function(models) {
