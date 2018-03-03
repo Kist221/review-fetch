@@ -204,12 +204,12 @@ router.get("/api/fetch_contact_data/status_and_active/:status", function(req, re
 });
 
 // Returns all data for contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "false"
-router.get("/api/fetch_contact_data/status_and_active/:status", function(req, res) {
+router.get("/api/fetch_contact_data/status_and_not_active/:status", function(req, res) {
   console.log(req.params);
   db.Contact.findAll({
     where: {
       status: req.params.status,
-      active: 1
+      active: 0
     },
     include: [db.Company]
     }).then(function(dbContact) {
