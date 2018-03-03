@@ -157,10 +157,21 @@ router.get("/api/fetch_templates/:id", function(req, res) {
 /************** contact routes ******************/
 
 // Returns all data for all contacts
-// TODO: Should probably filter by company
 router.get("/api/fetch_contact_data", function(req, res) {
 	db.Contact.findAll()
 	  .then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+// Returns all data for contacts by company id
+router.get("/api/fetch_contact_data/company/:id", function(req, res) {
+  db.Contact.findAll({
+    where: {
+      CompanyId: req.params.id
+    },
+      include: [db.Company]
+    }).then(function(dbContact) {
       res.json(dbContact);
     });
 });
