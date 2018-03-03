@@ -49,6 +49,11 @@ router.get("/", function(req, res) {
 });
 
 // Dashboard Page
+router.get("/register", function(req, res) {
+  res.render("register");
+});
+
+// Dashboard Page
 router.get("/dashboard", function(req, res) {
   res.render("dashboard");
 });
