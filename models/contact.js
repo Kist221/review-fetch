@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     // is the contact still active
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: true
     },
 
   });
