@@ -103,7 +103,7 @@
                                 <p class="category">Full list of your contacts</p>
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
+                                <table class="table table-stripeds">
                                     <thead>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -135,6 +135,7 @@
                                                 {{else}}
                                                     No
                                                 {{/if}}</td>
+                                                <td><div class="edit-contact btn" id="editContact{{this.id}}" value={{this.id}} data-toggle="modal" data-target="#editContactModal">Edit</div></td>
                                             </tr>
                                         {{/each}}
                                     </tbody>
@@ -190,23 +191,9 @@
       <div class="modal-body">
         <form>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Company</label>
-                        <input id="new-contact-company" type="text" class="form-control border-input" placeholder="Company">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Contact List</label>
-                        <input id="new-contact-contactlist" type="text" class="form-control border-input" placeholder="Contact List">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-12">
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="new-contact-email">Email address</label>
                         <input id="new-contact-email" type="email" class="form-control border-input" placeholder="Email">
                     </div>
                 </div>
@@ -260,6 +247,94 @@
   </div>
 </div>
 <!-- END New Contact Modal -->
+
+<!-- Edit Contact Modal -->
+<div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-labelledby="editContactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="editContactModalLabel">Edit Contact</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="checkbox" for="activeCheckbox">
+                            <input type="checkbox" id="activeCheckbox" data-toggle="checkbox">
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                       <label>Email Sent</label>
+                        <select id="edit-contact-status" class="form-control border-input">
+                          <option value="0">Not Sent</option>
+                          <option value="1">Sent</option>
+                          <option value="2">Replied</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                     <div class="form-group">
+                        <label for="edit-contact-email">Email address</label>
+                        <input id="edit-contact-email" type="email" class="form-control border-input" placeholder="Email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input id="edit-contact-firstname" type="text" class="form-control border-input" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input id="edit-contact-lastname" type="text" class="form-control border-input" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="edit-contact-gender" class="form-control border-input">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="none">No Answer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input id="edit-contact-phone" type="text" class="form-control border-input" placeholder="(xxx)-xxx-xxxx">
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="left-side">
+            <button id="edit-contact-btn" type="button" class="btn btn-default btn-simple" data-dismiss="modal">Save Changes</button>
+        </div>
+        <div class="divider"></div>
+        <div class="right-side">
+            <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Never mind</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Edit Contact Modal -->
 
 <!-- Contact page methods -->
 <script src="assets/js/contact-functions.js"></script>

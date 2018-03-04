@@ -281,14 +281,7 @@ router.post("/api/fetch_contact_data/new", function(req, res) {
 
 //Update contact
 router.post("/api/fetch_contact_data/update", function(req, res) {
-  db.Contact.update({
-    name: req.body.name,
-    gender: req.body.gender,
-    email: req.body.email,
-    phone: req.body.phone,
-    status: req.body.status,
-    active: req.body.active
-  }, {
+  db.Contact.update(req.body, {
     where: {
       id: req.body.id
     }
