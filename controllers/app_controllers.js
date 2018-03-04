@@ -139,7 +139,6 @@ router.post("/api/fetch_templates/new", function(req, res) {
 });
 
 // Returns all data for all contacts
-// TODO: Should probably filter by company
 router.get("/api/fetch_templates", function(req, res) {
   db.Template.findAll()
     .then(function(dbTemplates) {
