@@ -10,7 +10,10 @@ var app = express();
 // Requiring our models for syncing
 var db = require("./models");
 // configure handlebars template
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+
+app.engine("handlebars", exphbs({
+ helpers: require('./views/helpers/handlebars.js'),
+ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 // serve static content from the "public" directory
 app.use(express.static("public"));
