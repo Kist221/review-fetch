@@ -9,5 +9,10 @@ html
       title= subject
       link(rel="stylesheet", href="style.css", data-inline)
   body
-    p Hi #{name},
-    p This is just a html test.
+    h1 Hi #{name},
+    |
+    p Click on this happy link:
+    a(href='http://localhost:3000/api/fetch_contact_data/' + id) Happy
+    |
+    p Or this sad link...
+    a(href='http://localhost:3000/api/fetch_contact_data/' + id) Sad    

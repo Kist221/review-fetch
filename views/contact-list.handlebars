@@ -117,10 +117,24 @@
                                             <tr>
                                                 <td>{{this.name}}</td>
                                                 <td>{{this.email}}</td>
-                                                <td>{{this.gender}}</td>
+                                                <td>{{#if this.gender}}
+                                                    Male
+                                                {{else}}
+                                                    Female
+                                                {{/if}}</td>
                                                 <td>{{this.phone}}</td>
-                                                <td>{{this.status}}</td>
-                                                <td>{{this.active}}</td>
+                                                <td>{{#ifeq this.status 0}}
+                                                    Not Sent
+                                                {{else ifeq this.status 1}}
+                                                    Sent
+                                                {{else}}
+                                                    Replied
+                                                {{/ifeq}}</td>
+                                                <td>{{#if this.active}}
+                                                    Yes
+                                                {{else}}
+                                                    No
+                                                {{/if}}</td>
                                             </tr>
                                         {{/each}}
                                     </tbody>

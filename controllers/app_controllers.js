@@ -1,12 +1,17 @@
 // requirement
 var express = require("express");
 // This is the package we're using for sending email (for now)
-var nodeMailer = require("nodemailer");
+// var nodeMailer = require("nodemailer");
 
 var router = express.Router();
 
 // Requiring our models
 var db = require("../models");
+
+// Require our emailer function
+const NewEmail = require("../email");
+// test mailer
+// NewEmail("kist221@gmail.com", "Dillon", 3);
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -73,6 +78,16 @@ router.get("/templates", function(req, res) {
   res.render("templates");
 });
 
+// negative review Page
+router.get("/nreview", function(req, res) {
+  res.render("negative-review");
+});
+
+// positive review Page
+router.get("/preview", function(req, res) {
+  res.render("positive-review");
+});
+
 // Contact List Page
 router.get("/contacts", function(req, res) {
   db.Contact.findAll()
@@ -83,22 +98,33 @@ router.get("/contacts", function(req, res) {
 
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
-  // The email to use in sending the email
-  //(@ symbol changed to %40)
-  var sender = 'smtps://ReviewFetch%40gmail.com';
-  // Password of the email to use
-  var password = 'ReviewFetch2018';
 
-  // To send emails you need a transporter object
-  var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
+  var data = req.body;
 
-  // We now send the message
-  transporter.sendMail(req.body, function(err, response) {
-    if(err) {
+  console.log("API POST DATA: " + JSON.stringify(data));
+  
+  NewEmail(data.to, data.name, data.id)
+    .then(function(result) {
+      res.json(result);
+    })
+    .catch(function(err) {
       console.log(err);
-    }
-    res.json(response);
-  })
+    })
+
+  // The email to use in sending the email
+  // (@ symbol changed to %40)
+  // var sender = 'smtps://ReviewFetch%40gmail.com';
+  // Password of the email to use
+  // var password = 'ReviewFetch2018';
+  // To send emails you need a transporter object
+  // var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
+  // We now send the message
+  // transporter.sendMail(req.body, function(err, response) {
+  //   if(err) {
+  //     console.log(err);
+  //   }
+  //   res.json(response);
+  // })
 });
 
 /************** user routes ******************/
@@ -226,6 +252,18 @@ router.get("/api/fetch_contact_data/:id", function(req, res) {
 	db.Contact.findOne({
       where: {
         id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+// Fetch one contact by name
+router.get("/api/fetch_contact_data/name/:name", function(req, res) {
+  db.Contact.findOne({
+      where: {
+        name: req.params.name
       },
       include: [db.Company]
     }).then(function(dbContact) {
