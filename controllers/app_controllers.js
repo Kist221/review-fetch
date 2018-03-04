@@ -73,6 +73,16 @@ router.get("/templates", function(req, res) {
   res.render("templates");
 });
 
+// negative review Page
+router.get("/nreview", function(req, res) {
+  res.render("negative-review");
+});
+
+// positive review Page
+router.get("/preview", function(req, res) {
+  res.render("positive-review");
+});
+
 // Contact List Page
 router.get("/contacts", function(req, res) {
   db.Contact.findAll()
