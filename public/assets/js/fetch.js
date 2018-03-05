@@ -38,7 +38,7 @@ $(document).ready(function(){
 		contactListSelect.html(selectOptions);
 	});
 
-	// Populate the Contact List dropdown
+	// Populate the Template List dropdown
 	var templateListSelect = $("#select-template");
 	// GET the templates
 	$.get("/api/fetch_templates", function() {

@@ -78,8 +78,8 @@ router.get("/templates", function(req, res) {
   res.render("templates");
 });
 
-// positive review Page
-router.get("/nreview/:id", function(req, res) {
+// Negative review Page
+router.get("/nreview:id", function(req, res) {
     console.log(req.params.id);
     db.Contact.findOne({
       where: {
@@ -87,7 +87,6 @@ router.get("/nreview/:id", function(req, res) {
       },
       include: [db.Company]
     }).then(function(dbContact) {
-      console.log(dbContact);
       var review = {
         review_type: "negative",
         contact_name: dbContact.name,
@@ -96,11 +95,10 @@ router.get("/nreview/:id", function(req, res) {
       };
       res.render("review", review);
     });
-   
 });
 
-// positive review Page
-router.get("/preview/:id", function(req, res) {
+// Positive review Page
+router.get("/preview:id", function(req, res) {
     console.log(req.params.id);
     db.Contact.findOne({
       where: {
@@ -134,13 +132,18 @@ router.post("/api/send_email", function(req, res) {
 
   console.log("API POST DATA: " + JSON.stringify(data));
   
-  NewEmail(data.to, data.name, data.id)
-    .then(function(result) {
-      res.json(result);
-    })
-    .catch(function(err) {
-      console.log(err);
-    })
+  // NewEmail(data.to, data.name, data.id)
+  //   .then(function(result) {
+  //     res.json(result);
+  //   })
+  //   .catch(function(err) {
+  //     console.log(err);
+  //   })
+
+  NewEmail.sendPasswordReset(data.to, 'Testing',data.name,'http://localhost:3000/preview' + data.id);
+
+  res.json(data);
+
 
   // The email to use in sending the email
   // (@ symbol changed to %40)
