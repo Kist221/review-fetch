@@ -81,6 +81,7 @@ $(document).ready(function(){
 
 			//POST request sending the data which defines the mail content
 			$.post("/api/send_email", data, function() {
+        		fetchFunctions.showNotification('top','center');
 				console.log("Sending email...");
 			});
 		});
