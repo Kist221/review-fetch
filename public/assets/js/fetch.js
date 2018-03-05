@@ -67,31 +67,23 @@ $(document).ready(function(){
 		data.name = to.name;
 		data.id = to.id;
 		console.log("AFTER: " + data.id);
-		// POST request sending the data which defines the mail content
-		$.post("/api/send_email", data, function() {
-			console.log("Sending email...");
-		});
+
 		// Get the selected template and decode the URI
-		// $.get("/api/fetch_templates/" + templateListSelect.val(), function() {
-		// 	console.log("Getting template id#" + templateListSelect.val());
-		// }).done(function(res) {
-		// 	console.log(res);
-			// var template = ``;
-			// template += decodeURI(JSON.stringify(res));
-			// console.log(template);
-			// // Parse the string template
-			// template = JSON.parse(template);
-			// add 'to' property to the message
-			// data.to = to.email;
-			// // data.subject = decodeURI(res.subject);
-			// // data.html = decodeURI(res.message);
-			// data.name = to.name;
-			// data.id = to.id;
-			// // POST request sending the data which defines the mail content
-			// $.post("/api/send_email", data, function() {
-			// 	console.log("Sending email...");
-			// });
-		// });
+		$.get("/api/fetch_templates/" + templateListSelect.val(), function() {
+			console.log("Getting template id#" + templateListSelect.val());
+		}).done(function(res) {
+			console.log(res);
+
+			data.subject = decodeURI(res.subject);
+			data.message = decodeURI(res.message);
+
+			console.log(data);
+
+			//POST request sending the data which defines the mail content
+			$.post("/api/send_email", data, function() {
+				console.log("Sending email...");
+			});
+		});
 	}
 
 });

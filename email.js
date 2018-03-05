@@ -47,23 +47,23 @@ var transporter = nodeMailer.createTransport({
 // };
 
 // create template based sender function
-// assumes text.{ext} and html.{ext} in template/directory
+// assumes text.{ext} and html.{ext} in emails/directory
 var sendEmailTemplate = transporter.templateSender(
-    new EmailTemplate('./templates/resetPassword'), {
+    new EmailTemplate('./emails'), {
         from: 'reviewfetch@gmail.com',
     });
 
 // Export emailer function
 // module.exports = NewEmail;
-exports.sendEmail = function (subject, email, username, name, tokenUrl) {
+exports.sendEmail = function (subject, email, name, id, message) {
     // transporter.template
     sendEmailTemplate({
         to: email,
         subject: subject
     }, {
+        id: id,
         name: name,
-        username: username,
-        token: tokenUrl
+        message: message
     }, function (err, info) {
         if (err) {
             console.log(err)

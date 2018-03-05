@@ -140,7 +140,7 @@ router.post("/api/send_email", function(req, res) {
   //     console.log(err);
   //   })
 
-  NewEmail.sendPasswordReset(data.to, 'Testing',data.name,'http://localhost:3000/preview' + data.id);
+  NewEmail.sendEmail(data.subject, data.to ,data.name, data.id, data.message);
 
   res.json(data);
 
