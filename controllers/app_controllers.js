@@ -78,14 +78,45 @@ router.get("/templates", function(req, res) {
   res.render("templates");
 });
 
-// negative review Page
-router.get("/nreview", function(req, res) {
-  res.render("negative-review");
+// positive review Page
+router.get("/nreview/:id", function(req, res) {
+    console.log(req.params.id);
+    db.Contact.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      console.log(dbContact);
+      var review = {
+        review_type: "negative",
+        contact_name: dbContact.name,
+        contact_email: dbContact.email,
+        contact_phone: dbContact.phone
+      };
+      res.render("review", review);
+    });
+   
 });
 
 // positive review Page
-router.get("/preview", function(req, res) {
-  res.render("positive-review");
+router.get("/preview/:id", function(req, res) {
+    console.log(req.params.id);
+    db.Contact.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      var review = {
+        review_type: "positive",
+        contact_name: dbContact.name,
+        contact_email: dbContact.email,
+        contact_phone: dbContact.phone
+      };
+      res.render("review", review);
+    });
+   
 });
 
 // Contact List Page

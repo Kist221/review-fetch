@@ -7,12 +7,24 @@
                         <h4 class="title">Enter your review</h4>
                     </div>
                     <div class="content">
-                        <form id="nreview-form">
+                        <form id="review-form" class = {{review_type}}>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Contact Name</label>
-                                        <input id="contact-name" type="text" class="form-control border-input" placeholder="Contact Name">
+                                        <input id="contact-name" type="text" class="form-control border-input" placeholder={{contact_name}}>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Contact Email</label>
+                                        <input id="contact-email" type="text" class="form-control border-input" placeholder={{contact_email}}>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Contact Phone</label>
+                                        <input id="contact-phone" type="text" class="form-control border-input" placeholder={{contact_phone}}>
                                     </div>
                                 </div>
                             </div>
