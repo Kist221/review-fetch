@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	type = ['','info','success','warning','danger'];
-
+	
 	fetchFunctions = {
 	    showNotification: function(from, align){
 	    var color = 2;
@@ -19,12 +19,18 @@ $(document).ready(function(){
 	        });
 		}
 	}
+
+	// This is the object that will be sent to the server through POST request
 	var data = {
 	    from: 'ReviewFetch@gmail.com'
 	};
 
-	// Populate the Contact List dropdown
+	// Variable to hold the <select> for the list of templates
+	var templateListSelect = $("#select-template");
+	// Variable to hold the <select> for the list of contacts
 	var contactListSelect = $("#select-contact-list");
+
+	// Populate the Contact List dropdown
 	// GET the contacts (contacts for now)
 	$.get("/api/fetch_contact_data", function() {
 		console.log("getting contacts...");
@@ -39,8 +45,7 @@ $(document).ready(function(){
 	});
 
 	// Populate the Template List dropdown
-	var templateListSelect = $("#select-template");
-	// GET the templates
+	// GET the templates from the database
 	$.get("/api/fetch_templates", function() {
 		console.log("getting templates...");
 	}).done(function(res){
@@ -61,23 +66,16 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Get the selected contact
 		var to = JSON.parse(contactListSelect.val());
-		console.log(to);
-		console.log("BEFORE: " + data.id);
 		data.to = to.email;
 		data.name = to.name;
 		data.id = to.id;
-		console.log("AFTER: " + data.id);
 
 		// Get the selected template and decode the URI
 		$.get("/api/fetch_templates/" + templateListSelect.val(), function() {
 			console.log("Getting template id#" + templateListSelect.val());
 		}).done(function(res) {
-			console.log(res);
-
 			data.subject = decodeURI(res.subject);
 			data.message = decodeURI(res.message);
-
-			console.log(data);
 
 			//POST request sending the data which defines the mail content
 			$.post("/api/send_email", data, function() {

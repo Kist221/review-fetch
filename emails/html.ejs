@@ -1,3 +1,23 @@
+<!--
+
+This file is the HTML template that is used for the emails to be sent.
+All emails will be the same except for where EJS is applied.
+
+email.js will send this file id, name, and message
+This file will replace variables within these enclosing symbols <%= %>
+
+Since id, name, and message are passed in by email.js, this file will look for:
+<%= id %>
+<%= name %>
+<%= message %>
+and will replace those variables with whatever is passed by email.js
+
+Lines where EJS is applied are
+
+Line 213 for name
+Line 282 for message
+
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
  xmlns:v="urn:schemas-microsoft-com:vml"

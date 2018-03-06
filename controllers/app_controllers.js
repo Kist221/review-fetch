@@ -127,10 +127,7 @@ router.get("/contacts", function(req, res) {
 
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
-
   var data = req.body;
-
-  console.log("API POST DATA: " + JSON.stringify(data));
   
   // NewEmail(data.to, data.name, data.id)
   //   .then(function(result) {

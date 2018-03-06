@@ -46,7 +46,7 @@ var transporter = nodeMailer.createTransport({
 
 // };
 
-// create template based sender function
+// Create template based sender function
 // assumes text.{ext} and html.{ext} in emails/directory
 var sendEmailTemplate = transporter.templateSender(
     new EmailTemplate('./emails'), {
@@ -56,7 +56,6 @@ var sendEmailTemplate = transporter.templateSender(
 // Export emailer function
 // module.exports = NewEmail;
 exports.sendEmail = function (subject, email, name, id, message) {
-    // transporter.template
     sendEmailTemplate({
         to: email,
         subject: subject
