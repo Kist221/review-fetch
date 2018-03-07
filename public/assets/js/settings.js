@@ -24,8 +24,8 @@ $(document).ready(function(){
 	var companyName = $(".company-name");
 	var userUsername = $("#user-username");
 	var userPassword = $("#user-password");
-	var numOfTemplates = $("#numOfTemplates");
-	var numOfContacts = $("#numOfContacts");
+	var numOfTemplates = $("#numOf-templates");
+	var numOfContacts = $("#numOf-contacts");
 	// These are not stored in the DB but should be so we have to remodel our tables
 	var userFullName = $("#user-fullname");
 	var userEmail = $("#user-email");
@@ -58,6 +58,22 @@ $(document).ready(function(){
 		console.log("getting Company...");
 	}).done(function(res){
 		companyName.html(res.name);
+	});
+
+	// Display the amount of contacts this company has
+	$.get("/api/fetch_contact_data", function() {
+		console.log("getting Contacts...");
+	}).done(function(res){
+		console.log(res.length);
+		numOfContacts.text(res.length);
+	});
+
+	// Display the amount of templates this company has
+	$.get("/api/fetch_templates", function() {
+		console.log("getting Templates...");
+	}).done(function(res){
+		console.log(res.length);
+		numOfTemplates.text(res.length);
 	});
 
 });
