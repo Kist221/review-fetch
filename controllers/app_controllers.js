@@ -1,8 +1,5 @@
-// requirement
+// Require dependencies
 var express = require("express");
-// This is the package we're using for sending email (for now)
-// var nodeMailer = require("nodemailer");
-
 var router = express.Router();
 
 // Requiring our models
@@ -10,8 +7,6 @@ var db = require("../models");
 
 // Require our emailer function
 const NewEmail = require("../email");
-// test mailer
-// NewEmail("kist221@gmail.com", "Dillon", 3);
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -25,6 +20,8 @@ router.get("/seedUser", function(req, res) {
  db.Users.create({
   username: "user",
   password: "pass",
+  email: "reviewfetch@gmail.com",
+  fullname: "John Doe"
  })
  .then(function(dbUsers) {
       res.json(dbUsers);
@@ -34,10 +31,17 @@ router.get("/seedCompany", function(req, res) {
   // Create a company for the User
  db.Company.create({
   name: "My Company",
+  about: "Customizable app for improving companies reputations.",
+  twitter: "reviewfetch2018",
+  instagram: "reviewfetch2018",
+  facebook: "reviewfetch2018",
+  yelp: "https://www.yelp.com",
+  google: "https://www.google.com",
+  bbb: "https://www.bbb.org",
   UserId: 1
  })
- .then(function(dbUsers) {
-      res.json(dbUsers);
+ .then(function(dbCompany) {
+      res.json(dbCompany);
     });
 });
 /*************************
