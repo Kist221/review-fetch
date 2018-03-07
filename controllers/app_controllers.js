@@ -310,6 +310,43 @@ router.post("/api/fetch_contact_data/new", function(req, res) {
     });
 });
 
+// Fetch contacts with negative reviews that replied (i.e., status = 2)
+router.get("/api/fetch_contact_data/reviews/nreviews", function(req, res) {
+  db.Contact.findAll({
+      where: {
+        reviewType: false,
+        status: 2 // replied
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+// Fetch contacts with positive reviews that replied (i.e., status = 2)
+router.get("/api/fetch_contact_data/reviews/previews", function(req, res) {
+  db.Contact.findAll({
+      where: {
+        reviewType: true,
+        status: 2 // replied
+      },
+      include: [db.Company]
+    }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
+//Update contact
+router.post("/api/fetch_contact_data/update", function(req, res) {
+  db.Contact.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  }).then(function(dbContact) {
+      res.json(dbContact);
+    });
+});
+
 //Update contact
 router.post("/api/fetch_contact_data/update", function(req, res) {
   db.Contact.update(req.body, {

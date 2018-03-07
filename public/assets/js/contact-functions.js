@@ -92,7 +92,7 @@ $("#edit-contact-btn").on("click", updateContact);
     contact.status = $("#edit-contact-status").val();
     contact.id = $("#editContactModal").attr("data-id");
 
-    $.post("/api/fetch_contact_data/update", contact, function() {
+    $.post("/api/fetch_contact_data/update" + contact.id, contact, function() {
         var editSuccessMsg = "Changes to Contact Saved!";
         contactFunctions.showNotification('top','center', editSuccessMsg);
         setTimeout(function(){ window.location.href='/contacts'; }, 2000);

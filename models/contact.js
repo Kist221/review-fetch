@@ -42,6 +42,17 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: true
     },
 
+     // the contacts review
+    review: {
+      type: DataTypes.TEXT,
+    },
+
+    // review type 0: negative review, 1: positive review
+    reviewType: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+
   });
 
   Contact.associate = function(models) {
