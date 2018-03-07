@@ -90,11 +90,11 @@
                      <div class="content">
                         <div class="author">
                            <img class="avatar border-white" src="http://i.pravatar.cc/200" alt="Company Image"/>
-                           <h4 class="title">Company Name<br />
+                           <h4 class="company-name title">Company Name<br />
                               <a href="#"><small>@company</small></a>
                            </h4>
                         </div>
-                        <p class="description text-center">
+                        <p class="description text-center company-about">
                            "This is my company motto."
                         </p>
                      </div>
@@ -102,10 +102,10 @@
                      <div class="text-center">
                         <div class="row">
                            <div class="col-md-3 col-md-offset-1">
-                              <h5>12<br /><small>Templates</small></h5>
+                              <h5 id="numOf-templates">12<br /><small>Templates</small></h5>
                            </div>
                            <div class="col-md-4">
-                              <h5>512<br /><small>Contacts</small></h5>
+                              <h5 id="numOf-contacts">512<br /><small>Contacts</small></h5>
                            </div>
                            <div class="col-md-3">
                               <h5>88%<br /><small>Positive</small></h5>
@@ -130,7 +130,7 @@
                                     <div class="col-xs-6">
                                        <div class="form-group">
                                           <label>Yelp</label>
-                                          <input type="text" class="form-control border-input" placeholder="Yelp Link">
+                                          <input id="company-yelp-link" type="text" class="form-control border-input" placeholder="Yelp Link">
                                        </div>
                                     </div>
                                     <div class="col-xs-3 text-right">
@@ -148,7 +148,7 @@
                                     <div class="col-xs-6">
                                        <div class="form-group">
                                           <label>Google</label>
-                                          <input type="text" class="form-control border-input" disabled placeholder="Google Link" value="https://www.google.com">
+                                          <input id="company-google-link" type="text" class="form-control border-input" disabled placeholder="Google Link" value="https://www.google.com">
                                        </div>
                                     </div>
                                     <div class="col-xs-3 text-right">
@@ -166,7 +166,7 @@
                                     <div class="col-xs-6">
                                        <div class="form-group">
                                           <label>Better Business Bureau</label>
-                                          <input type="text" class="form-control border-input" disabled placeholder="BBB Link" value="https://www.bbb.org">
+                                          <input id="company-bbb-link" type="text" class="form-control border-input" disabled placeholder="BBB Link" value="https://www.bbb.org">
                                        </div>
                                     </div>
                                     <div class="col-xs-3 text-right">
@@ -187,22 +187,16 @@
                      <div class="content">
                         <form>
                            <div class="row">
-                              <div class="col-md-5">
+                              <div class="col-md-7">
                                  <div class="form-group">
                                     <label>Company</label>
-                                    <input type="text" class="form-control border-input" placeholder="Company Name" value="Company Name">
+                                    <input type="text" class="form-control border-input company-name" placeholder="Company Name" value="Company Name">
                                  </div>
                               </div>
-                              <div class="col-md-3">
+                              <div class="col-md-5">
                                  <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control border-input" placeholder="First Name" value="John">
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control border-input" placeholder="Last Name" value="Doe">
+                                    <label>Full Name</label>
+                                    <input id="user-fullname" type="text" class="form-control border-input" placeholder="Full Name" value="John Doe">
                                  </div>
                               </div>
                            </div>
@@ -210,13 +204,13 @@
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>User Name</label>
-                                    <input type="text" class="form-control border-input" placeholder="Username" value="user">
+                                    <input id="user-username" type="text" class="form-control border-input" placeholder="Username" value="user">
                                  </div>
                               </div>
                               <div class="col-md-6">
                                  <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control border-input" placeholder="Email" value="john@doe.com">
+                                    <input id="user-email" type="email" class="form-control border-input" placeholder="Email" value="john@doe.com">
                                  </div>
                               </div>
                            </div>
@@ -225,7 +219,7 @@
                                  <div class="form-group">
                                     <label>Password</label>
                                     <div class="input-group">
-                                      <input type="password" placeholder="password" value="pass" class="form-control border-input">
+                                      <input id="user-password" type="password" placeholder="password" value="pass" class="form-control border-input">
                                       <span class="input-group-addon btn" style="border: 1px solid #CCC5B9"><i class="ti-eye"></i></span>
                                     </div>
                                  </div>
@@ -235,27 +229,27 @@
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Company Twitter</label>
-                                    <input type="text" class="form-control border-input" placeholder="Twitter" value="https://twitter.com/company">
+                                    <input id="company-twitter" type="text" class="form-control border-input" placeholder="Twitter" value="https://twitter.com/company">
                                  </div>
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Company Instagram</label>
-                                    <input type="text" class="form-control border-input" placeholder="Instagram">
+                                    <input id="company-instagram" type="text" class="form-control border-input" placeholder="Instagram">
                                  </div>
                               </div>
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label>Company Facebook</label>
-                                    <input type="number" class="form-control border-input" placeholder="Facebook">
+                                    <input id="company-facebook" type="text" class="form-control border-input" placeholder="Facebook">
                                  </div>
                               </div>
                            </div>
                            <div class="row">
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <label>About Me</label>
-                                    <textarea rows="5" class="form-control border-input" placeholder="Here can be your description">This is my company motto.</textarea>
+                                    <label>About The Company</label>
+                                    <textarea rows="5" class="form-control border-input company-about" placeholder="Here can be your description">This is my company motto.</textarea>
                                  </div>
                               </div>
                            </div>
@@ -299,4 +293,4 @@
    </div>
 </div>
 <!-- Contact page methods -->
-<script src="assets/js/fetch.js"></script>
+<script src="assets/js/settings.js"></script>
