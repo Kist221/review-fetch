@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Fetch Reviews</button>
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Preview</button>
+                                        <div id="fetch-preview" class="btn btn-info btn-fill btn-wd">Preview</div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -122,14 +122,14 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div id="preview-row" class="row" style="display: none;">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Preview of your email</h4>
                             </div>
                             <div class="content">
-                                <iframe src="assets/previews/email.html"></iframe>
+                                <iframe id="preview-iframe" src="assets/previews/email.html" style="border: none; width: 100%; height: 500px;"></iframe>
                             </div>
                         </div>
                     </div>

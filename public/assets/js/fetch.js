@@ -85,4 +85,37 @@ $(document).ready(function(){
 		});
 	}
 
+	// Store the preview button in a variable
+	var previewBtn = $("#fetch-preview");
+	// Attach the on click  listener for previewBtn
+	$(previewBtn).on("click", showPreview);
+
+	// This displays the preview of the email template with
+	// name and message dynamically applied
+	function showPreview(event) {
+		console.log("Showing preview...");
+		event.preventDefault();
+		// Show the preview row by setting its display to block
+		$("#preview-row").attr("style", "display: block;");
+		// Get the selected contact
+		var to = JSON.parse(contactListSelect.val());
+		var contactName = to.name;
+
+		// Get the selected template and decode the URI
+		$.get("/api/fetch_templates/" + templateListSelect.val(), function() {
+			console.log("Getting template id#" + templateListSelect.val());
+		}).done(function(res) {
+			var templateMessage = decodeURI(res.message);
+
+			// Get a reference to the iframe
+			var iframe = document.getElementById("preview-iframe");
+			var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+			// Dynamically change the contents of the holders with the appropriate
+			// contact name and template message
+			innerDoc.getElementById("name-holder").innerHTML = contactName;
+			innerDoc.getElementById("message-holder").innerHTML = templateMessage;
+		});
+	}	
+
 });
