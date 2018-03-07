@@ -42,6 +42,11 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: true
     },
 
+     // the contacts review
+    review: {
+      type: DataTypes.TEXT,
+    },
+
   });
 
   Contact.associate = function(models) {
