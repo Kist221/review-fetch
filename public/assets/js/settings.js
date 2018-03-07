@@ -96,4 +96,14 @@ $(document).ready(function(){
 		numOfTemplates.text(res.length + "");
 	});
 
+	// Attach event listener to password reveal button
+	// On mouse down handler - reveal password
+	$("#password-reveal-btn").on("mousedown", function(event) {
+		userPassword.attr("type", "text");
+	});
+	// On mouse up handler - hide password
+	$("#password-reveal-btn").on("mouseup", function(event) {
+		userPassword.attr("type", "password");
+	});
+
 });
