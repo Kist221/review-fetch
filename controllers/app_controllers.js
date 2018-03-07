@@ -1,8 +1,5 @@
 // requirement
 var express = require("express");
-// This is the package we're using for sending email (for now)
-// var nodeMailer = require("nodemailer");
-
 var router = express.Router();
 
 // Requiring our models
@@ -10,8 +7,6 @@ var db = require("../models");
 
 // Require our emailer function
 const NewEmail = require("../email");
-// test mailer
-// NewEmail("kist221@gmail.com", "Dillon", 3);
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -80,7 +75,6 @@ router.get("/templates", function(req, res) {
 
 // Negative review Page
 router.get("/nreview:id", function(req, res) {
-    console.log(req.params.id);
     db.Contact.findOne({
       where: {
         id: req.params.id
@@ -99,7 +93,6 @@ router.get("/nreview:id", function(req, res) {
 
 // Positive review Page
 router.get("/preview:id", function(req, res) {
-    console.log(req.params.id);
     db.Contact.findOne({
       where: {
         id: req.params.id
@@ -114,7 +107,6 @@ router.get("/preview:id", function(req, res) {
       };
       res.render("review", review);
     });
-   
 });
 
 // Contact List Page
@@ -128,34 +120,8 @@ router.get("/contacts", function(req, res) {
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
   var data = req.body;
-  
-  // NewEmail(data.to, data.name, data.id)
-  //   .then(function(result) {
-  //     res.json(result);
-  //   })
-  //   .catch(function(err) {
-  //     console.log(err);
-  //   })
-
-  NewEmail.sendEmail(data.subject, data.to ,data.name, data.id, data.message);
-
+  NewEmail.sendEmail(data.to, data.subject, data.id, data.name, data.message);
   res.json(data);
-
-
-  // The email to use in sending the email
-  // (@ symbol changed to %40)
-  // var sender = 'smtps://ReviewFetch%40gmail.com';
-  // Password of the email to use
-  // var password = 'ReviewFetch2018';
-  // To send emails you need a transporter object
-  // var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
-  // We now send the message
-  // transporter.sendMail(req.body, function(err, response) {
-  //   if(err) {
-  //     console.log(err);
-  //   }
-  //   res.json(response);
-  // })
 });
 
 /************** user routes ******************/
