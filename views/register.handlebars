@@ -1,38 +1,37 @@
-       <div class="wrapper">
-         <nav class="navbar navbar-default" role="navigation-demo" id="demo-navbar">
+       <link rel="stylesheet" type="text/css" href="assets/css/landing.css">
+       <link rel="stylesheet" type="text/css" href="assets/css/register.css">
+
+<div class="full-screen register">
+    <nav class="navbar navbar-ct-transparent navbar-fixed-top" role="navigation" id="register-navbar">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-2">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Review Fetch</a>
+          <a class="navbar-brand" href="https://damp-fjord-98999.herokuapp.com/">Review Fetch</a>
         </div>
-    
+
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navigation-example-2">
+        <div class="collapse navbar-collapse" id="navigation-2">
           <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#" class="btn btn-simple">About Us</a>
+                <a href="/about" class="btn btn-simple">About</a>
             </li>
             <li>
-                <a href="#" class="btn btn-simple">Tutorial</a>
-            </li>
-            <li>
-                <a href="#" target="_blank" class="btn btn-simple"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-                <a href="#" target="_blank" class="btn btn-simple"><i class="fa fa-facebook"></i></a>
+                <a href="/login" class="btn btn-simple">Login</a>
             </li>
            </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-->
     </nav>
-        <div class="background" style="background-image: url('../assets/img/someimg.jpg');">
-            <div class=""></div>
+
+    <div class="wrapper">
+        <div class="background" style="background-image: url('/assets/img/city.jpg');">
+            <div class="filter-black"></div>
             <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
@@ -42,7 +41,7 @@
                                 </div>
                                 <div class="description">
                                     <h3> We've got you covered </h3>
-                                    <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient. Everything you need in a single case.</p>
+                                    <p>Import your contacts, or add as you go. Powerful feedback collections with data analytics. Everything you need in a single campaign.</p>
                                 </div>
                             </div>
                             <div class="info info-horizontal">
@@ -51,7 +50,7 @@
                                 </div>
                                 <div class="description">
                                     <h3> Clear Directions </h3>
-                                    <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.</p>
+                                    <p>Efficiently unleash information with custom templated email creation and email previewing. Quickly maximize timely deliverables.</p>
                                 </div>
                             </div>
                             <div class="info info-horizontal">
@@ -60,46 +59,38 @@
                                 </div>
                                 <div class="description">
                                     <h3> We value your privacy </h3>
-                                    <p>Completely synergize resource taxing relationships via premier niche markets.</p>
+                                    <p>Your information is protected under the <b>Iron Fist</b> of Tucson Shenanigans.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
-                            <div class="demo-card">
+                            <div class="card">
                                 <h3 class="title text-center">Register</h3>
-                                <div class="social">
-                                    <button href="#" class="btn btn-fill btn-icon btn-facebook"><i class="fa fa-facebook"></i></button>
-                                    <button href="#" class="btn btn-fill btn-icon btn-google"><i class="fa fa-google"></i></button>
-                                    <button href="#" class="btn btn-fill btn-icon btn-twitter"><i class="fa fa-twitter"></i></button>
-                                </div>
 
                                 <div class="division">
                                     <div class="line l"></div>
-                                    <span>or</span>
+                                    <span><i class="ti-angle-double-down"></i></span>
                                     <div class="line r"></div>
                                 </div>
                                 <form class="register-form">
+                                    <input type="text" class="form-control" placeholder="Username">
                                     <input type="text" class="form-control" placeholder="Email">
-
                                     <input type="password" class="form-control" placeholder="Password">
-
                                     <input type="password" class="form-control" placeholder="Confirm Password">
+                                    <input type="text" class="form-control" placeholder="Company Name">
 
                                     <button class="btn btn-fill btn-block">Register</button>
                                 </form>
                                 <div class="login">
-                                    <p>Already have an account? <a>Log in</a>.</p>
+                                    <p>Already have an account? <a href="#">Log in</a>.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
             </div>
-
-            <div class="demo-footer text-center">
-                    <h6>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Review Fetch</h6>
-            </div>
         </div>
     </div>
+</div>
 
 <!-- Contact page methods -->
 <script src="assets/js/fetch.js"></script>
