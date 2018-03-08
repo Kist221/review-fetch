@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 	    	$.notify({
 	        	icon: "ti-check",
-	        	message: "<b>Emails successfully sent!</b>"
+	        	message: "<b>Changes saved!</b>"
 
 	        },{
 	            type: type[color],
@@ -104,6 +104,99 @@ $(document).ready(function(){
 	// On mouse up handler - hide password
 	$("#password-reveal-btn").on("mouseup", function(event) {
 		userPassword.attr("type", "password");
+	});
+
+	// Attach event listener to each edit button
+	var yelpEditBtn = $("#yelp-edit-btn");
+	var googleEditBtn = $("#google-edit-btn");
+	var bbbEditBtn = $("#bbb-edit-btn");
+
+	// Yelp link edit button
+	$(yelpEditBtn).on("click", function(event) {
+		// If the input field for the yelp link is currently being edited
+		if(yelpEditBtn.text().toLowerCase() === "save") {
+			// Pass the id of the company
+			// and the new value for the link
+			data = {
+				id: 1,
+				yelp: companyYelpLink.val()
+			}
+			// POST request to process and save the new value
+			$.post("/api/fetch_company/update", data, function() {
+				console.log("Updating yelp link...");
+			}).done(function() {
+				// Once done saving the new value,
+				// disable to input field and change button text to 'Edit'
+				companyYelpLink.attr("disabled", true);
+				yelpEditBtn.text("Edit");
+				// Display the notification
+				settingsFunctions.showNotification('top','center');
+			});
+		}
+		// Else if it is not being edited, enable the input field for editing
+		// and change button text to 'Save'
+		else {
+			companyYelpLink.attr("disabled", false);
+			yelpEditBtn.text("Save")
+		}
+	});
+	// Google link edit button
+	$(googleEditBtn).on("click", function(event) {
+		// If the input field for the google link is currently being edited
+		if(googleEditBtn.text().toLowerCase() === "save") {
+			// Pass the id of the company
+			// and the new value for the link
+			data = {
+				id: 1,
+				google: companyGoogleLink.val()
+			}
+			// POST request to process and save the new value
+			$.post("/api/fetch_company/update", data, function() {
+				console.log("Updating google link...");
+			}).done(function() {
+				// Once done saving the new value,
+				// disable to input field and change button text to 'Edit'
+				companyGoogleLink.attr("disabled", true);
+				googleEditBtn.text("Edit");
+				// Display the notification
+				settingsFunctions.showNotification('top','center');
+			});
+		}
+		// Else if it is not being edited, enable the input field for editing
+		// and change button text to 'Save'
+		else {
+			companyGoogleLink.attr("disabled", false);
+			googleEditBtn.text("Save")
+		}
+	});
+	// BBB link edit button
+	$(bbbEditBtn).on("click", function(event) {
+		// If the input field for the bbb link is currently being edited
+		if(bbbEditBtn.text().toLowerCase() === "save") {
+			// Pass the id of the company
+			// and the new value for the link
+			data = {
+				id: 1,
+				bbb: companyBBBLink.val()
+			}
+			// POST request to process and save the new value
+			$.post("/api/fetch_company/update", data, function() {
+				console.log("Updating bbb link...");
+			}).done(function() {
+				// Once done saving the new value,
+				// disable to input field and change button text to 'Edit'
+				companyBBBLink.attr("disabled", true);
+				bbbEditBtn.text("Edit");
+				// Display the notification
+				settingsFunctions.showNotification('top','center');
+			});
+		}
+		// Else if it is not being edited, enable the input field for editing
+		// and change button text to 'Save'
+		else {
+			companyBBBLink.attr("disabled", false);
+			bbbEditBtn.text("Save")
+		}
 	});
 
 });

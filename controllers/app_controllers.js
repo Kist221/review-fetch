@@ -391,5 +391,16 @@ router.post("/api/fetch_company/new", function(req, res) {
     });
 });
 
+//Update contact
+router.post("/api/fetch_company/update", function(req, res) {
+  db.Company.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  }).then(function(dbCompany) {
+      res.json(dbCompany);
+    });
+});
+
 // Export routes for server.js to use.
 module.exports = router;
