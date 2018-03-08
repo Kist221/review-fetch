@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     // Giving the Users model a fullname of type STRING
     fullname: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }

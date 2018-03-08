@@ -58,7 +58,7 @@ router.post("/api/login", passport.authenticate("local"), function(req, res) {
   // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
   // So we're sending the user back the route to the members page because the redirect will happen on the front end
   // They won't get this or even be able to access this page if they aren't authed
-  res.render("/dashboard");
+  res.json("/dashboard");
 });
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -67,21 +67,29 @@ router.post("/api/login", passport.authenticate("local"), function(req, res) {
 router.post("/api/signup", function(req, res) {
   console.log(req.body);
   db.Users.create({
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password
-  }).then(function() {
-    res.redirect(307, "/api/login");
+  }).then(function(dbUsers) {
+    console.log("Registered new user...");
+    db.Company.create({
+      UserId: dbUsers.dataValues.id,
+      name: req.body.company
+    }).then(function() {
+      console.log("Registered new company...");
+      res.redirect(307, "/api/login");
+    });
   }).catch(function(err) {
-    console.log(err);
-    res.json(err);
-    // res.status(422).json(err.errors[0].message);
+    console.log("ERROR!");
+    //res.json(err);
+    res.status(422).json(err.errors[0].message);
   });
 });
 
 router.get("/login", function(req, res) {
   // If the user already has an account send them to the members page
   if (req.user) {
-    res.redirect("/members");
+    res.redirect("/dashboard");
   }
   res.render("login");
 });
