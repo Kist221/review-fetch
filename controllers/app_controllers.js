@@ -2,6 +2,8 @@
 var express = require("express");
 var passport = require("../config/passport");
 var router = express.Router();
+// Requiring bcrypt for password hashing. Using the bcrypt-nodejs version as the regular bcrypt module
+var bcrypt = require("bcrypt-nodejs");
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 // Requiring our models
@@ -217,6 +219,7 @@ router.post("/api/fetch_users/new", function(req, res) {
 
 // Update User
 router.post("/api/fetch_users/update", function(req, res) {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
   db.Users.update(req.body, {
     where: {
       id: req.body.id
@@ -430,7 +433,7 @@ router.post("/api/fetch_company/new", function(req, res) {
 router.post("/api/fetch_company/update", function(req, res) {
   db.Company.update(req.body, {
     where: {
-      id: req.body.id
+      UserId: req.body.id
     }
   }).then(function(dbCompany) {
       res.json(dbCompany);
