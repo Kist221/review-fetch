@@ -1,10 +1,13 @@
 // Require dependencies
 var express = require("express");
+var passport = require("../config/passport");
 var router = express.Router();
-
+// Requiring bcrypt for password hashing. Using the bcrypt-nodejs version as the regular bcrypt module
+var bcrypt = require("bcrypt-nodejs");
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 // Requiring our models
 var db = require("../models");
-
 // Require our emailer function
 const NewEmail = require("../email");
 
@@ -50,35 +53,87 @@ router.get("/seedCompany", function(req, res) {
  *                       *
  *************************/
 
-// Home page/ Dashboard
-// This will eventually be a Landing Page
-// but for now redirect to dashboard
-router.get("/", function(req, res) {
-  res.render("dashboard");
+ // Using the passport.authenticate middleware with our local strategy.
+// If the user has valid login credentials, send them to the members page.
+// Otherwise the user will be sent an error
+router.post("/api/login", passport.authenticate("local"), function(req, res) {
+  // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+  // So we're sending the user back the route to the members page because the redirect will happen on the front end
+  // They won't get this or even be able to access this page if they aren't authed
+  res.json("/dashboard");
 });
 
-// Dashboard Page
-router.get("/register", function(req, res) {
+// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
+// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+// otherwise send back an error
+router.post("/api/signup", function(req, res) {
+  console.log(req.body);
+  db.Users.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  }).then(function(dbUsers) {
+    console.log("Registered new user...");
+    db.Company.create({
+      UserId: dbUsers.dataValues.id,
+      name: req.body.company
+    }).then(function() {
+      console.log("Registered new company...");
+      res.redirect(307, "/api/login");
+    });
+  }).catch(function(err) {
+    console.log("ERROR!");
+    //res.json(err);
+    res.status(422).json(err.errors[0].message);
+  });
+});
+
+// This will return the current user login
+router.post("/api/currentUser", function(req, res) {
+  res.json(req.user);
+})
+
+// Route for login page
+router.get("/login", function(req, res) {
+  // If the user already has an account send them to the members page
+  if (req.user) {
+    res.redirect("/dashboard");
+  }
+  res.render("login");
+});
+
+// Route for logging user out
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+// Home page / Landing Page
+router.get("/", function(req, res) {
+  // If the user already has an account send them to the dashboard page
+  if (req.user) {
+    res.redirect("/dashboard");
+  }
   res.render("register");
 });
 
 // Dashboard Page
-router.get("/dashboard", function(req, res) {
+router.get("/dashboard", isAuthenticated, function(req, res) {
   res.render("dashboard");
 });
 
 // Settings Page
-router.get("/settings", function(req, res) {
+router.get("/settings", isAuthenticated, function(req, res) {
   res.render("settings");
 });
 
 // Fetch Reviews Page
-router.get("/fetch", function(req, res) {
+router.get("/fetch", isAuthenticated, function(req, res) {
   res.render("fetch");
 });
 
 // Email Templates Page
-router.get("/templates", function(req, res) {
+router.get("/templates", isAuthenticated, function(req, res) {
   res.render("templates");
 });
 
@@ -119,7 +174,7 @@ router.get("/preview:id", function(req, res) {
 });
 
 // Contact List Page
-router.get("/contacts", function(req, res) {
+router.get("/contacts", isAuthenticated, function(req, res) {
   db.Contact.findAll()
     .then(function(dbContact) {
       res.render("contact-list", {contacts: dbContact});
@@ -164,6 +219,7 @@ router.post("/api/fetch_users/new", function(req, res) {
 
 // Update User
 router.post("/api/fetch_users/update", function(req, res) {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
   db.Users.update(req.body, {
     where: {
       id: req.body.id
@@ -354,11 +410,11 @@ router.get("/api/fetch_company", function(req, res) {
     });
 });
 
-// Fetch one company by id
+// Fetch one company by UserId
 router.get("/api/fetch_company/:id", function(req, res) {
 	db.Company.findOne({
       where: {
-        id: req.params.id
+        UserId: req.params.id
       },
       include: [db.Contact]
     }).then(function(dbCompany) {
@@ -377,7 +433,7 @@ router.post("/api/fetch_company/new", function(req, res) {
 router.post("/api/fetch_company/update", function(req, res) {
   db.Company.update(req.body, {
     where: {
-      id: req.body.id
+      UserId: req.body.id
     }
   }).then(function(dbCompany) {
       res.json(dbCompany);

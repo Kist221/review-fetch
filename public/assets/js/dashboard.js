@@ -10,8 +10,13 @@ $(document).ready(function(){
         pd.initRightMenu();
     }
 
-    //  Activate the tooltips
-    $('[rel="tooltip"]').tooltip();
+    // Set the current company name
+    $.post("/api/currentUser", function(res) {
+    }).then(function(res) {
+        $.get("/api/fetch_company/" + res.id, function(res) {
+            $(".company-logo-text").html(res.name);
+        });
+    });
 
 });
 

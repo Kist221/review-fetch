@@ -1,26 +1,32 @@
 // requirements
 var express = require("express");
 var bodyParser = require("body-parser");
+var session = require("express-session");
+var passport = require("./config/passport");
 var exphbs = require("express-handlebars");
 var routes = require("./controllers/app_controllers.js");
 // server PORT
 var PORT = process.env.PORT || 3000;
-// start express
-var app = express();
 // Requiring our models for syncing
 var db = require("./models");
-// configure handlebars template
+// start express
+var app = express();
 
+// configure handlebars template
 app.engine("handlebars", exphbs({
  helpers: require('./views/helpers/handlebars.js'),
  defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-// serve static content from the "public" directory
-app.use(express.static("public"));
 // URL parser
 app.use(bodyParser.urlencoded({ extended: false }));
 // json parser
 app.use(bodyParser.json());
+// serve static content from the "public" directory
+app.use(express.static("public"));
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 // Give the server access to routes
 app.use(routes);
 

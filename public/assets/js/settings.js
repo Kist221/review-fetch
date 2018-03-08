@@ -37,7 +37,11 @@ $(document).ready(function(){
 	var userEmail = $("#user-email");
 	// Misc.:
 	var numOfTemplates = $("#numOf-templates");
-	var numOfContacts = $("#numOf-contacts");	
+	var numOfContacts = $("#numOf-contacts");
+
+	$.post("/api/currentUser", function(res){
+	}).then(function(res) {
+	
 
 	// GET the User's data
 	// (Currently hard-coded the id to 1 which is the only User in the DB)
@@ -46,11 +50,10 @@ $(document).ready(function(){
 	// userPassword
 	// userFullName
 	// userEmail
-	$.get("/api/fetch_users/1", function() {
+	$.get("/api/fetch_users/" + res.id, function() {
 		console.log("getting User...");
 	}).done(function(res){
 		userUsername.val(res.username);
-		userPassword.val(res.password);
 		userEmail.val(res.email);
 		userFullName.val(res.fullname);
 	});
@@ -66,7 +69,7 @@ $(document).ready(function(){
 	// companyYelpLink
 	// companyGoogleLink
 	// companyBBBLink
-	$.get("/api/fetch_company/1", function() {
+	$.get("/api/fetch_company/" + res.id, function() {
 		console.log("getting Company...");
 	}).done(function(res){
 		companyName.html(res.name);
@@ -75,6 +78,7 @@ $(document).ready(function(){
 		companyInstagram.val(res.instagram);
 		companyFacebook.val(res.facebook);
 		companyAbout.val(res.about);
+		companyAbout.html(res.about);
 		companyYelpLink.val(res.yelp);
 		companyGoogleLink.val(res.google);
 		companyBBBLink.val(res.bbb);
@@ -118,7 +122,7 @@ $(document).ready(function(){
 			// Pass the id of the company
 			// and the new value for the link
 			data = {
-				id: 1,
+				id: res.id,
 				yelp: companyYelpLink.val()
 			}
 			// POST request to process and save the new value
@@ -147,7 +151,7 @@ $(document).ready(function(){
 			// Pass the id of the company
 			// and the new value for the link
 			data = {
-				id: 1,
+				id: res.id,
 				google: companyGoogleLink.val()
 			}
 			// POST request to process and save the new value
@@ -176,7 +180,7 @@ $(document).ready(function(){
 			// Pass the id of the company
 			// and the new value for the link
 			data = {
-				id: 1,
+				id: res.id,
 				bbb: companyBBBLink.val()
 			}
 			// POST request to process and save the new value
@@ -206,7 +210,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Build the data for Company
 		var companyData = {
-			id: 1,
+			id: res.id,
 			name: $(companyName[1]).val(),
 			twitter: companyTwitter.val(),
 			instagram: companyInstagram.val(),
@@ -215,12 +219,19 @@ $(document).ready(function(){
 		};
 		// Build the data for User
 		var userData = {
-			id: 1,
-			username: userUsername.val(),
-			password: userPassword.val(),
-			email: userEmail.val(),
-			fullname: userFullName.val()
+			id: res.id,
+			username: userUsername.val().trim(),
+			email: userEmail.val().trim()
 		};
+
+		// If password was changed, update the DB table
+		if(userPassword.val().trim()) {
+			userData.password = userPassword.val().trim();
+		}
+		// If fullname was changed, update the DB table
+		if(userFullName.val().trim()) {
+			userData.fullname = userFullName.val().trim();
+		} 
 
 		// POST request to update the Company data
 		$.post("/api/fetch_company/update", companyData, function() {
@@ -232,7 +243,9 @@ $(document).ready(function(){
 		}).done(function() {
 			// Display the notification
 			settingsFunctions.showNotification('top','center');
+			setTimeout(function(){ window.location.href='/settings'; }, 2000);
 		});
 	}
 
+	});
 });
