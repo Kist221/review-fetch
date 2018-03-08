@@ -86,6 +86,10 @@ router.post("/api/signup", function(req, res) {
   });
 });
 
+router.get("/api/currentUser", function(req, res) {
+  res.json(req.user);
+})
+
 router.get("/login", function(req, res) {
   // If the user already has an account send them to the members page
   if (req.user) {

@@ -10,9 +10,6 @@ $(document).ready(function(){
         pd.initRightMenu();
     }
 
-    // //  Activate the tooltips
-    // $('[rel="tooltip"]').tooltip();
-
 });
 
 // activate collapse right menu when the windows is resized
