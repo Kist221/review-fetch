@@ -10,6 +10,14 @@ $(document).ready(function(){
         pd.initRightMenu();
     }
 
+    // Set the current company name
+    $.post("/api/currentUser", function(res) {
+    }).then(function(res) {
+        $.get("/api/fetch_company/" + res.id, function(res) {
+            $(".company-logo-text").html(res.name);
+        });
+    });
+
 });
 
 // activate collapse right menu when the windows is resized

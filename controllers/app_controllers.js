@@ -86,10 +86,12 @@ router.post("/api/signup", function(req, res) {
   });
 });
 
-router.get("/api/currentUser", function(req, res) {
+// This will return the current user login
+router.post("/api/currentUser", function(req, res) {
   res.json(req.user);
 })
 
+// Route for login page
 router.get("/login", function(req, res) {
   // If the user already has an account send them to the members page
   if (req.user) {
@@ -119,17 +121,17 @@ router.get("/dashboard", isAuthenticated, function(req, res) {
 });
 
 // Settings Page
-router.get("/settings", function(req, res) {
+router.get("/settings", isAuthenticated, function(req, res) {
   res.render("settings");
 });
 
 // Fetch Reviews Page
-router.get("/fetch", function(req, res) {
+router.get("/fetch", isAuthenticated, function(req, res) {
   res.render("fetch");
 });
 
 // Email Templates Page
-router.get("/templates", function(req, res) {
+router.get("/templates", isAuthenticated, function(req, res) {
   res.render("templates");
 });
 
@@ -170,7 +172,7 @@ router.get("/preview:id", function(req, res) {
 });
 
 // Contact List Page
-router.get("/contacts", function(req, res) {
+router.get("/contacts", isAuthenticated, function(req, res) {
   db.Contact.findAll()
     .then(function(dbContact) {
       res.render("contact-list", {contacts: dbContact});
@@ -405,11 +407,11 @@ router.get("/api/fetch_company", function(req, res) {
     });
 });
 
-// Fetch one company by id
+// Fetch one company by UserId
 router.get("/api/fetch_company/:id", function(req, res) {
 	db.Company.findOne({
       where: {
-        id: req.params.id
+        UserId: req.params.id
       },
       include: [db.Contact]
     }).then(function(dbCompany) {
