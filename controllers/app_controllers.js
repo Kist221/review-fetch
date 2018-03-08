@@ -1,10 +1,11 @@
 // Require dependencies
 var express = require("express");
+var passport = require("../config/passport");
 var router = express.Router();
-
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 // Requiring our models
 var db = require("../models");
-
 // Require our emailer function
 const NewEmail = require("../email");
 
@@ -50,20 +51,58 @@ router.get("/seedCompany", function(req, res) {
  *                       *
  *************************/
 
-// Home page/ Dashboard
-// This will eventually be a Landing Page
-// but for now redirect to dashboard
-router.get("/", function(req, res) {
-  res.render("dashboard");
+ // Using the passport.authenticate middleware with our local strategy.
+// If the user has valid login credentials, send them to the members page.
+// Otherwise the user will be sent an error
+router.post("/api/login", passport.authenticate("local"), function(req, res) {
+  // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+  // So we're sending the user back the route to the members page because the redirect will happen on the front end
+  // They won't get this or even be able to access this page if they aren't authed
+  res.render("/dashboard");
 });
 
-// Dashboard Page
-router.get("/register", function(req, res) {
+// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
+// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+// otherwise send back an error
+router.post("/api/signup", function(req, res) {
+  console.log(req.body);
+  db.Users.create({
+    email: req.body.email,
+    password: req.body.password
+  }).then(function() {
+    res.redirect(307, "/api/login");
+  }).catch(function(err) {
+    console.log(err);
+    res.json(err);
+    // res.status(422).json(err.errors[0].message);
+  });
+});
+
+router.get("/login", function(req, res) {
+  // If the user already has an account send them to the members page
+  if (req.user) {
+    res.redirect("/members");
+  }
+  res.render("login");
+});
+
+// Route for logging user out
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+// Home page / Landing Page
+router.get("/", function(req, res) {
+  // If the user already has an account send them to the dashboard page
+  if (req.user) {
+    res.redirect("/dashboard");
+  }
   res.render("register");
 });
 
 // Dashboard Page
-router.get("/dashboard", function(req, res) {
+router.get("/dashboard", isAuthenticated, function(req, res) {
   res.render("dashboard");
 });
 
