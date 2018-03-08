@@ -8,12 +8,6 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 //Our parent block
-// describe('Books', () => {
-//     beforeEach((done) => { //Before each test we empty the database
-//         Book.remove({}, (err) => { 
-//            done();         
-//         });     
-//     });
 /*
   * Test the /GET route
   */

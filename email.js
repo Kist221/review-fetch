@@ -1,7 +1,5 @@
-const Email = require('email-templates');
 const nodeMailer = require("nodemailer");
-
-var EmailTemplate = require('email-templates').EmailTemplate;
+const EmailTemplate = require('email-templates').EmailTemplate;
 
 // Password of the email to use
 var password = 'ReviewFetch2018';
