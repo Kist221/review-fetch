@@ -1,7 +1,5 @@
-const Email = require('email-templates');
 const nodeMailer = require("nodemailer");
-
-var EmailTemplate = require('email-templates').EmailTemplate;
+const EmailTemplate = require('email-templates').EmailTemplate;
 
 // Password of the email to use
 var password = 'ReviewFetch2018';
@@ -17,34 +15,7 @@ var transporter = nodeMailer.createTransport({
     }
 });
 
-// NOTE! - Must run test from within directory. 
-
-// const NewEmail = function(to, name, id) {
-
-// const email = new Email({
-//   message: {
-//     from: 'ReviewFetch@gmail.com'
-//   },
-//   // uncomment below to send emails in development/test env:
-//   send: true,
-//   transport: transporter,
-// });
-
-// return email
-//   .send({
-//     template: 'parts',
-//     message: {
-//       to: to //change to test with your own email
-//     },
-//     locals: {
-//       name: name,
-//       id: id
-//     }
-//   });
-//   // .then(console.log)
-//   // .catch(console.error);
-
-// };
+// NOTE! - Must run test from within directory.
 
 // Create template based sender function
 // assumes text.{ext} and html.{ext} in emails/directory
@@ -55,7 +26,7 @@ var sendEmailTemplate = transporter.templateSender(
 
 // Export emailer function
 // module.exports = NewEmail;
-exports.sendEmail = function (subject, email, name, id, message) {
+exports.sendEmail = function (email, subject, id, name, message) {
     sendEmailTemplate({
         to: email,
         subject: subject

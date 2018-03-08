@@ -84,41 +84,38 @@ router.get("/templates", function(req, res) {
 
 // Negative review Page
 router.get("/nreview:id", function(req, res) {
-    console.log(req.params.id);
     db.Contact.findOne({
       where: {
         id: req.params.id
       },
       include: [db.Company]
     }).then(function(dbContact) {
-      var review = {
+      var negative = {
         review_type: "negative",
         contact_name: dbContact.name,
         contact_email: dbContact.email,
         contact_phone: dbContact.phone
       };
-      res.render("review", review);
+      res.render("negative", negative);
     });
 });
 
 // Positive review Page
 router.get("/preview:id", function(req, res) {
-    console.log(req.params.id);
     db.Contact.findOne({
       where: {
         id: req.params.id
       },
       include: [db.Company]
     }).then(function(dbContact) {
-      var review = {
+      var positive = {
         review_type: "positive",
         contact_name: dbContact.name,
         contact_email: dbContact.email,
         contact_phone: dbContact.phone
       };
-      res.render("review", review);
+      res.render("positive", positive);
     });
-   
 });
 
 // Contact List Page

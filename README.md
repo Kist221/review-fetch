@@ -1,102 +1,67 @@
 # review-fetch
-Customizable app for improving companies reputations.
 
-## MVP Requirements
- 	- Data Importing
- 	- Email Template Viewing
- 	- Successful Email Send / Recieve
- 	- Feedback Landing Pages (negative: internal form feedback| positive: direct reviews)
-### Pages
-	• Home/Dashboard - reviewfetch.com/# > Login Modal if not signed in
-		• Settings - reviewfetch.com/setup
-		• Manage Contact Data - reviewfetch.com/data
-		• Fetch Reviews Campaign Page - reviewfetch.com/fetch
-		• Analytics - reviewfetch.com/analytics
+Welcome to review-fetch. Widely known as 'Review Fetch'©™.
 
-## Additional Needs
- 	- Login Functionality
- 	- Data Management (import/export/upsert/delete)
- 	- Email Template (adding / changing / different types)
- 	- Analytics (track campaigns / existing feedback / tag customers)
+This customizable application allows for companies to take control of their longterm success by encouraging feedback, building a good reputation, and building brand awareness. All key factors for a successful business to grow and retain a loyal customer base.
 
-### Nice to Have
-	- SMS
-	- Templated Application (branding resale)
-	- Business Listing Integrations - Prepopulated messages / templates / remove friction
-	- Custom Survey / Reporting
-	- OPT IN further contact/feedback (for negative form)
+## Functionality & Features
 
-## SAMPLE REVIEW URLS
-**Google**
-`https://www.google.com/search?source=hp&ei=QreRWqCVPMqgjwPT84PwBw&q=cs+design+studios&oq=cs+design+&gs_l=psy-ab.3.0.0l10.1020.1915.0.2666.11.7.0.2.2.0.178.839.4j3.7.0....0...1c.1.64.psy-ab..2.9.855.0..0i131k1j0i131i46k1j46i131k1.0.jUJ9WtfdjSM#lrd=0x86d66eff1714e775:0x8b275482698d0703,3,,,`
+The current abilities of Review Fetch consist of:
 
-**Yelp**
-`https://www.yelp.com/writeareview/biz/aSPHnb8ViWq7c6x6NDkatg?return_url=%2Fbiz%2FaSPHnb8ViWq7c6x6NDkatg`
+- Contact Importing
 
-**BBB**
-`https://www.bbb.org/tucson/business-reviews/web-design/cs-design-studios-in-tucson-az-20024770/reviews-and-complaints/?review=true`
+- Custom Templated Email Creation
 
+- Email Previewing
 
+- Email Sending
 
+- Click Through Tracking
 
-# Week 16 - Project Suggestions
+- Feedback Collection
 
-### Overview
+- Data Analytics
 
-Since projects are being worked on this week, you won't have a homework assignment, but a project is a perfect context in which to practice writing tests! 
+- & More! (Beta)
 
-Incorporate a few of the below suggestions into your project. You'll write better code, and it will help you consolidate your testing habits.
+### App Technologies & Breakdown:
 
-- - -
+* Node & Express Web Server;
 
-### Testing Suggestions
+* Mysql Database & ORM (Sequelize);
 
-* Set up Karma so you can run your tests as you develop.
+* Get & Post Routes For Retrieving And Adding Data;
 
-* Prior to implementing a feature, use Nightmare to write a functional test for it.
+* [Deployed Using Heroku][1];
 
-* Prior to implementing a function, use Mocha and Chai to write unit tests against it.
+* EJS Email Templating;
 
-* Run your tests prior to committing your code so you can be sure nothing breaks between commits.
+* Polished Frontend / Ui Using Handlebars For Server-Side Templating;
 
-* **Non-Obligatory Bonus**: If you're confident and feel like you have some time to tinker, set up [Travis CI](https://travis-ci.org/). This will automatically run your tests whenever you or any of your team members makes a commit. 
+* Folder Structure Meeting Mvc Paradigm;
 
-# Project Requirements
+* Quality Coding Standards;
 
-This document outlines the base requirements for Project 2.
+* Basic Testing Framework;
 
-### Requirements
+* Simple To Use!
 
-Your project must:
+## Sample
 
-* Use a Node and Express Web Server;
+* [Review Fetch][1] - Get Started Today!
 
-* Be backed by a MySQL Database an ORM (not necessarily Sequelize);
+### Authors
 
-* Have both GET and POST routes for retrieving and adding new data;
+Review Fetch is brought to you and made possible by:
 
-* Be deployed using Heroku (with Data);
+* **Jamie David** - *Project Lead / Front-End* - [jjdavid14](https://github.com/jjdavid14)
 
-* Utilize at least one new library, package, or technology that we haven’t discussed;
+* **Roy Norton** - *Back-End Spec-Ops* - [rnorton12](https://github.com/rnorton12)
 
-* Have a polished frontend / UI;
+* **Dillon Faulkner** - *Lazy Grunt Work Slacker* - [Kist221](https://github.com/Kist221)
 
-* Have folder structure that meets MVC Paradigm;
+### License
 
-* Meet good quality coding standards (indentation, scoping, naming).
+This project is licensed under the **_Iron Fist_** of Tucson Shenanigans.
 
-* Must not expose sensitive API key information on the server, see [Protecting-API-Keys-In-Node.md](../../../10-nodejs/03-Supplemental/Protecting-API-Keys-In-Node.md)
-
-### Suggestions
-
-Your project _should_:
-
-* Incorporate Basic Testing Framework, see [Project Suggestions](../Suggestions/README.md);
-
-* Use Handlebars for Server-Side Templating
-
-* Incorporate Authentication (JSON Web Tokens, Sessions, Etc.)
-
-* Use an existing public dataset to power the database
-
-* Create a migration strategy for sharing data across team members.
+[1]: https://damp-fjord-98999.herokuapp.com
