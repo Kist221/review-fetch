@@ -81,13 +81,13 @@ router.get("/nreview:id", function(req, res) {
       },
       include: [db.Company]
     }).then(function(dbContact) {
-      var review = {
+      var negative = {
         review_type: "negative",
         contact_name: dbContact.name,
         contact_email: dbContact.email,
         contact_phone: dbContact.phone
       };
-      res.render("review", review);
+      res.render("negative", negative);
     });
 });
 
@@ -99,13 +99,13 @@ router.get("/preview:id", function(req, res) {
       },
       include: [db.Company]
     }).then(function(dbContact) {
-      var review = {
+      var positive = {
         review_type: "positive",
         contact_name: dbContact.name,
         contact_email: dbContact.email,
         contact_phone: dbContact.phone
       };
-      res.render("review", review);
+      res.render("positive", positive);
     });
 });
 
