@@ -132,38 +132,12 @@ router.get("/contacts", function(req, res) {
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
   var data = req.body;
-  
-  // NewEmail(data.to, data.name, data.id)
-  //   .then(function(result) {
-  //     res.json(result);
-  //   })
-  //   .catch(function(err) {
-  //     console.log(err);
-  //   })
-
   NewEmail.sendEmail(data.subject, data.to ,data.name, data.id, data.message);
-
   res.json(data);
-
-
-  // The email to use in sending the email
-  // (@ symbol changed to %40)
-  // var sender = 'smtps://ReviewFetch%40gmail.com';
-  // Password of the email to use
-  // var password = 'ReviewFetch2018';
-  // To send emails you need a transporter object
-  // var transporter = nodeMailer.createTransport(sender + ':' + password + '@smtp.gmail.com');
-  // We now send the message
-  // transporter.sendMail(req.body, function(err, response) {
-  //   if(err) {
-  //     console.log(err);
-  //   }
-  //   res.json(response);
-  // })
 });
 
-/************** user routes ******************/
-// Returns all users
+/************** User routes ******************/
+// Returns all Users
 router.get("/api/fetch_users", function(req, res) {
 	db.Users.findAll({
       include: [db.Company]
@@ -172,7 +146,7 @@ router.get("/api/fetch_users", function(req, res) {
     });
 });
 
-// Fetch one user by id
+// Fetch one User by id
 router.get("/api/fetch_users/:id", function(req, res) {
 	db.Users.findOne({
       where: {
@@ -184,9 +158,20 @@ router.get("/api/fetch_users/:id", function(req, res) {
     });
 });
 
-// Creates a new user
+// Creates a new User
 router.post("/api/fetch_users/new", function(req, res) {
   db.Users.create(req.body).then(function(dbUsers) {
+      res.json(dbUsers);
+    });
+});
+
+// Update User
+router.post("/api/fetch_users/update", function(req, res) {
+  db.Users.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  }).then(function(dbUsers) {
       res.json(dbUsers);
     });
 });

@@ -74,7 +74,7 @@ $(document).ready(function(){
 		companyTwitter.val(res.twitter);
 		companyInstagram.val(res.instagram);
 		companyFacebook.val(res.facebook);
-		companyAbout.html(res.about);
+		companyAbout.val(res.about);
 		companyYelpLink.val(res.yelp);
 		companyGoogleLink.val(res.google);
 		companyBBBLink.val(res.bbb);
@@ -198,5 +198,41 @@ $(document).ready(function(){
 			bbbEditBtn.text("Save")
 		}
 	});
+
+	// Updating the profile
+	$("#profile-form").on("submit", handleFormSubmit);
+	// This will handle the form submission which will save the input fields onto the DB
+	function handleFormSubmit(event) {
+		event.preventDefault();
+		// Build the data for Company
+		var companyData = {
+			id: 1,
+			name: $(companyName[1]).val(),
+			twitter: companyTwitter.val(),
+			instagram: companyInstagram.val(),
+			facebook: companyFacebook.val(),
+			about: $(companyAbout[1]).val()
+		};
+		// Build the data for User
+		var userData = {
+			id: 1,
+			username: userUsername.val(),
+			password: userPassword.val(),
+			email: userEmail.val(),
+			fullname: userFullName.val()
+		};
+
+		// POST request to update the Company data
+		$.post("/api/fetch_company/update", companyData, function() {
+			console.log("Updating Company");
+		});
+		// POST request to update the User data
+		$.post("/api/fetch_users/update", userData, function() {
+			console.log("Updating User");
+		}).done(function() {
+			// Display the notification
+			settingsFunctions.showNotification('top','center');
+		});
+	}
 
 });
