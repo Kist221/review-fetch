@@ -13,47 +13,7 @@ const NewEmail = require("../email");
 
 // Create all our routes and set up logic within those routes where required.
 
-/**********************
- *                    *
- *    SEEDS for DB    *
- *                    *
- **********************/
-router.get("/seedUser", function(req, res) {
-  // Create a User
- db.Users.create({
-  username: "user",
-  password: "pass",
-  email: "reviewfetch@gmail.com",
-  fullname: "John Doe"
- })
- .then(function(dbUsers) {
-      res.json(dbUsers);
-    });
-});
-router.get("/seedCompany", function(req, res) {
-  // Create a company for the User
- db.Company.create({
-  name: "My Company",
-  about: "Customizable app for improving companies reputations.",
-  twitter: "reviewfetch2018",
-  instagram: "reviewfetch2018",
-  facebook: "reviewfetch2018",
-  yelp: "https://www.yelp.com",
-  google: "https://www.google.com",
-  bbb: "https://www.bbb.org",
-  UserId: 1
- })
- .then(function(dbCompany) {
-      res.json(dbCompany);
-    });
-});
-/*************************
- *                       *
- *   END SEEDS for DB    *
- *                       *
- *************************/
-
- // Using the passport.authenticate middleware with our local strategy.
+// Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
 router.post("/api/login", passport.authenticate("local"), function(req, res) {
@@ -139,38 +99,38 @@ router.get("/templates", isAuthenticated, function(req, res) {
 
 // Negative review Page
 router.get("/nreview:id", function(req, res) {
-    db.Contact.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Company]
-    }).then(function(dbContact) {
-      var negative = {
-        review_type: "negative",
-        contact_name: dbContact.name,
-        contact_email: dbContact.email,
-        contact_phone: dbContact.phone
-      };
-      res.render("negative", negative);
-    });
+  db.Contact.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [db.Company]
+  }).then(function(dbContact) {
+    var negative = {
+      review_type: "negative",
+      contact_name: dbContact.name,
+      contact_email: dbContact.email,
+      contact_phone: dbContact.phone
+    };
+    res.render("negative", negative);
+  });
 });
 
 // Positive review Page
 router.get("/preview:id", function(req, res) {
-    db.Contact.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Company]
-    }).then(function(dbContact) {
-      var positive = {
-        review_type: "positive",
-        contact_name: dbContact.name,
-        contact_email: dbContact.email,
-        contact_phone: dbContact.phone
-      };
-      res.render("positive", positive);
-    });
+  db.Contact.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [db.Company]
+  }).then(function(dbContact) {
+    var positive = {
+      review_type: "positive",
+      contact_name: dbContact.name,
+      contact_email: dbContact.email,
+      contact_phone: dbContact.phone
+    };
+    res.render("positive", positive);
+  });
 });
 
 // Contact List Page
@@ -199,7 +159,11 @@ router.post("/api/send_email", function(req, res) {
   res.json(data);
 });
 
-/************** User routes ******************/
+/**********************
+ *                    *
+ *    User routes     *
+ *                    *
+ **********************/
 // Returns all Users
 router.get("/api/fetch_users", function(req, res) {
 	db.Users.findAll({
@@ -240,8 +204,12 @@ router.post("/api/fetch_users/update", function(req, res) {
     });
 });
 
-/************** template routes ******************/
-// Creates a new template
+/**************************
+ *                        *
+ *    Template routes     *
+ *                        *
+ **************************/
+// Creates a new Template
 router.post("/api/fetch_templates/new", function(req, res) {
   db.Company.findOne({
     where: {
@@ -284,7 +252,7 @@ router.get("/api/fetch_company_templates", function(req, res) {
   });
 });
 
-// Fetch one template by id
+// Fetch one Template by id
 router.get("/api/fetch_templates/:id", function(req, res) {
   db.Template.findOne({
       where: {
@@ -296,9 +264,12 @@ router.get("/api/fetch_templates/:id", function(req, res) {
     });
 });
 
-/************** contact routes ******************/
-
-// Returns all data for all contacts
+/**************************
+ *                        *
+ *    Contact routes      *
+ *                        *
+ **************************/
+// Returns all Contacts
 router.get("/api/fetch_contact_data", function(req, res) {
   db.Company.findOne({
     where: {
@@ -317,7 +288,7 @@ router.get("/api/fetch_contact_data", function(req, res) {
   });
 });
 
-// Returns all data for contacts by company id
+// Returns all Contacts by Company id
 router.get("/api/fetch_contact_data/company/:id", function(req, res) {
   db.Contact.findAll({
     where: {
@@ -329,7 +300,7 @@ router.get("/api/fetch_contact_data/company/:id", function(req, res) {
     });
 });
 
-// Returns all data for contacts where active = 0 or 1
+// Returns all data for Contacts where active = 0 or 1
 router.get("/api/fetch_contact_data/active/:active", function(req, res) {
   console.log(req.params);
   db.Contact.findAll({
@@ -342,7 +313,7 @@ router.get("/api/fetch_contact_data/active/:active", function(req, res) {
     });
 });
 
-// Returns all data for contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "true"
+// Returns all data for Contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "true"
 router.get("/api/fetch_contact_data/status_and_active/:status", function(req, res) {
   console.log(req.params);
   db.Contact.findAll({
@@ -356,7 +327,7 @@ router.get("/api/fetch_contact_data/status_and_active/:status", function(req, re
     });
 });
 
-// Returns all data for contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "false"
+// Returns all data for Contacts with status = 0: "not sent", or 1: "sent", or 2: "replied" and active = "false"
 router.get("/api/fetch_contact_data/status_and_not_active/:status", function(req, res) {
   console.log(req.params);
   db.Contact.findAll({
@@ -370,7 +341,7 @@ router.get("/api/fetch_contact_data/status_and_not_active/:status", function(req
     });
 });
 
-// Fetch one contact by id
+// Fetch one Contact by id
 router.get("/api/fetch_contact_data/:id", function(req, res) {
 	db.Contact.findOne({
       where: {
@@ -382,7 +353,7 @@ router.get("/api/fetch_contact_data/:id", function(req, res) {
     });
 });
 
-// Fetch one contact by name
+// Fetch one Contact by name
 router.get("/api/fetch_contact_data/name/:name", function(req, res) {
   db.Contact.findOne({
       where: {
@@ -394,7 +365,7 @@ router.get("/api/fetch_contact_data/name/:name", function(req, res) {
     });
 });
 
-// Creates a new contact
+// Creates a new Contact
 router.post("/api/fetch_contact_data/new", function(req, res) {
   db.Company.findOne({
     where: {
@@ -409,7 +380,7 @@ router.post("/api/fetch_contact_data/new", function(req, res) {
   });
 });
 
-// Fetch contacts with negative reviews that replied (i.e., status = 2)
+// Fetch Contacts with negative reviews that replied (i.e., status = 2)
 router.get("/api/fetch_contact_data/reviews/nreviews", function(req, res) {
   db.Contact.findAll({
       where: {
@@ -422,7 +393,7 @@ router.get("/api/fetch_contact_data/reviews/nreviews", function(req, res) {
     });
 });
 
-// Fetch contacts with positive reviews that replied (i.e., status = 2)
+// Fetch Contacts with positive reviews that replied (i.e., status = 2)
 router.get("/api/fetch_contact_data/reviews/previews", function(req, res) {
   db.Contact.findAll({
       where: {
@@ -435,7 +406,7 @@ router.get("/api/fetch_contact_data/reviews/previews", function(req, res) {
     });
 });
 
-//Update contact
+// Update Contact
 router.post("/api/fetch_contact_data/update", function(req, res) {
   db.Contact.update(req.body, {
     where: {
@@ -446,19 +417,12 @@ router.post("/api/fetch_contact_data/update", function(req, res) {
     });
 });
 
-//Update contact
-router.post("/api/fetch_contact_data/update", function(req, res) {
-  db.Contact.update(req.body, {
-    where: {
-      id: req.body.id
-    }
-  }).then(function(dbContact) {
-      res.json(dbContact);
-    });
-});
-
-/************** company routes ******************/
-// Returns all company data
+/**************************
+ *                        *
+ *    Company routes      *
+ *                        *
+ **************************/
+// Returns all Company
 router.get("/api/fetch_company", function(req, res) {
 	db.Company.findAll({
       include: [db.Contact]
@@ -467,7 +431,7 @@ router.get("/api/fetch_company", function(req, res) {
     });
 });
 
-// Fetch one company by UserId
+// Fetch one Company by UserId
 router.get("/api/fetch_company/:id", function(req, res) {
 	db.Company.findOne({
       where: {
@@ -479,14 +443,14 @@ router.get("/api/fetch_company/:id", function(req, res) {
     });
 });
 
-// Creates a new company
+// Creates a new Company
 router.post("/api/fetch_company/new", function(req, res) {
   db.Company.create(req.body).then(function(dbCompany) {
       res.json(dbCompany);
     });
 });
 
-//Update contact
+// Update Company
 router.post("/api/fetch_company/update", function(req, res) {
   db.Company.update(req.body, {
     where: {
