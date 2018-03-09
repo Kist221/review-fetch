@@ -8,7 +8,6 @@ $(document).ready(function(){
 	    	$.notify({
 	        	icon: "ti-check",
 	        	message: "<b>Emails successfully sent!</b>"
-
 	        },{
 	            type: type[color],
 	            timer: 1000,
@@ -46,7 +45,7 @@ $(document).ready(function(){
 
 	// Populate the Template List dropdown
 	// GET the templates from the database
-	$.get("/api/fetch_templates", function() {
+	$.get("/api/fetch_company_templates", function() {
 		console.log("getting templates...");
 	}).done(function(res){
 		var selectOptions = "";

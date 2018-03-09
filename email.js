@@ -25,7 +25,6 @@ var sendEmailTemplate = transporter.templateSender(
     });
 
 // Export emailer function
-// module.exports = NewEmail;
 exports.sendEmail = function (email, subject, id, name, message) {
     sendEmailTemplate({
         to: email,
