@@ -175,16 +175,27 @@ router.get("/preview:id", function(req, res) {
 
 // Contact List Page
 router.get("/contacts", isAuthenticated, function(req, res) {
-  db.Contact.findAll()
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    db.Contact.findAll({
+      where: {
+        CompanyId: dbCompany.id
+      }
+    })
     .then(function(dbContact) {
       res.render("contact-list", {contacts: dbContact});
     });
+  });
 });
 
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
   var data = req.body;
-  NewEmail.sendEmail(data.subject, data.to ,data.name, data.id, data.message);
+  NewEmail.sendEmail(data.to, data.subject ,data.id, data.name, data.message);
   res.json(data);
 });
 
@@ -232,17 +243,45 @@ router.post("/api/fetch_users/update", function(req, res) {
 /************** template routes ******************/
 // Creates a new template
 router.post("/api/fetch_templates/new", function(req, res) {
-  db.Template.create(req.body).then(function(dbTemplates) {
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    req.body.CompanyId = dbCompany.id;
+    db.Template.create(req.body)
+    .then(function(dbTemplates) {
       res.json(dbTemplates);
     });
+  });
 });
 
-// Returns all data for all contacts
+// Returns all Template
 router.get("/api/fetch_templates", function(req, res) {
   db.Template.findAll()
     .then(function(dbTemplates) {
       res.json(dbTemplates);
     });
+});
+
+// Returns all Template for a Company
+router.get("/api/fetch_company_templates", function(req, res) {
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    db.Template.findAll({
+      where: {
+        CompanyId: dbCompany.id
+      }
+    })
+    .then(function(dbTemplates) {
+      res.json(dbTemplates);
+    });
+  });
 });
 
 // Fetch one template by id
@@ -261,10 +300,21 @@ router.get("/api/fetch_templates/:id", function(req, res) {
 
 // Returns all data for all contacts
 router.get("/api/fetch_contact_data", function(req, res) {
-	db.Contact.findAll()
-	  .then(function(dbContact) {
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    db.Contact.findAll({
+      where: {
+        CompanyId: dbCompany.id
+      }
+    })
+    .then(function(dbContact) {
       res.json(dbContact);
     });
+  });
 });
 
 // Returns all data for contacts by company id
@@ -346,10 +396,17 @@ router.get("/api/fetch_contact_data/name/:name", function(req, res) {
 
 // Creates a new contact
 router.post("/api/fetch_contact_data/new", function(req, res) {
-  console.log(req.body);
-  db.Contact.create(req.body).then(function(dbContact) {
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    req.body.CompanyId = dbCompany.id;
+    db.Contact.create(req.body).then(function(dbContact) {
       res.json(dbContact);
     });
+  });
 });
 
 // Fetch contacts with negative reviews that replied (i.e., status = 2)

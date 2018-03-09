@@ -49,10 +49,7 @@ $(document).ready(function(){
 			name: nameOfNewTemplate,
 			subject: subjectOfNewTemplate,
 			message: contentOfNewTemplate,
-			CompanyId: 1
 		};
-
-		console.log(newTemplate);
 
 		// POST request to save the content, which is
 		// the template that the user created, to the 
