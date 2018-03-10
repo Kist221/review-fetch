@@ -97,7 +97,6 @@
                                     <thead>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Gender</th>
                                         <th>Phone</th>
                                         <th>Status</th>
                                         <th>Active</th>
@@ -107,11 +106,6 @@
                                             <tr>
                                                 <td>{{this.name}}</td>
                                                 <td>{{this.email}}</td>
-                                                <td>{{#if this.gender}}
-                                                    Male
-                                                {{else}}
-                                                    Female
-                                                {{/if}}</td>
                                                 <td>{{this.phone}}</td>
                                                 <td>{{#ifeq this.status 0}}
                                                     Not Sent
