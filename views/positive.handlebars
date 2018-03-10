@@ -12,7 +12,7 @@
                     <div class="content align-middle">
                          <div class="row">
                             <div class="col-xs-4">
-                            <a href="https://www.google.com/search?q=cs+design+studios&oq=cs+design&aqs=chrome.1.69i57j0l5.3261j0j7&sourceid=chrome&ie=UTF-8#lrd=0x86d66eff1714e775:0x8b275482698d0703,3,,," target="_blank" rel="noopener">
+                            <a {{#if google}} href="{{google}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>Google</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/google-icon.svg" alt="Google Image" class="img-responsive" style="height: 300px;">
@@ -20,7 +20,7 @@
                             </a>
                             </div>
                             <div class="col-xs-4">
-                            <a href="https://www.bbb.org/tucson/business-reviews/web-design/cs-design-studios-in-tucson-az-20024770/reviews-and-complaints?review=true" target="_blank" rel="noopener">
+                            <a {{#if bbb}} href="{{bbb}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>BBB</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/better-business-bureau-1.svg" alt="BBB Image" class="img-responsive" style="height: 300px;">
@@ -28,7 +28,7 @@
                             </a>
                             </div>
                             <div class="col-xs-4">
-                            <a href="https://www.yelp.com/writeareview/biz/aSPHnb8ViWq7c6x6NDkatg?return_url=%2Fbiz%2FaSPHnb8ViWq7c6x6NDkatg" target="_blank" rel="noopener">
+                            <a {{#if yelp}} href="{{yelp}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>Yelp</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/yelp-icon.svg" alt="Yelp Image" class="img-responsive" style="height: 300px;">

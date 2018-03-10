@@ -169,17 +169,16 @@ router.get("/nreview:id", function(req, res) {
 
 // Positive review Page
 router.get("/preview:id", function(req, res) {
-  db.Contact.findOne({
+  db.Company.findOne({
     where: {
-      id: req.params.id
-    },
-    include: [db.Company]
-  }).then(function(dbContact) {
+      UserId: req.params.id
+    }
+  }).then(function(dbCompany) {
     var positive = {
       review_type: "positive",
-      contact_name: dbContact.name,
-      contact_email: dbContact.email,
-      contact_phone: dbContact.phone
+      yelp: dbCompany.yelp,
+      google: dbCompany.google,
+      bbb: dbCompany.bbb
     };
     res.render("positive", positive);
   });
