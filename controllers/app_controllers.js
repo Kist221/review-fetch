@@ -158,6 +158,7 @@ router.get("/nreview:id", function(req, res) {
   }).then(function(dbContact) {
     var negative = {
       review_type: "negative",
+      contact_id: dbContact.id,
       contact_name: dbContact.name,
       contact_email: dbContact.email,
       contact_phone: dbContact.phone
