@@ -31,6 +31,7 @@ module.exports = function(sequelize, DataTypes) {
     // status - 0: a review request was not sent
     // status - 1: a review request was sent
     // status - 2: the contact submitted a review
+    // status - 3: the contact opened but did not leave a review
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 0

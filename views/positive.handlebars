@@ -9,10 +9,10 @@
                         <h2 class="title">Please Select Your Preferred Feedback Platform</h2>
                         <hr>
                     </div>
-                    <div class="content align-middle">
+                    <div id="positive-review" data-contact="{{contact_id}}" class="content align-middle">
                          <div class="row">
                             <div class="col-xs-4">
-                            <a {{#if google}} href="{{google}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
+                            <a {{#if google}} href="{{google}}" class="btn review-link" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>Google</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/google-icon.svg" alt="Google Image" class="img-responsive" style="height: 300px;">
@@ -20,7 +20,7 @@
                             </a>
                             </div>
                             <div class="col-xs-4">
-                            <a {{#if bbb}} href="{{bbb}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
+                            <a {{#if bbb}} href="{{bbb}}" class="btn review-link" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>BBB</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/better-business-bureau-1.svg" alt="BBB Image" class="img-responsive" style="height: 300px;">
@@ -28,7 +28,7 @@
                             </a>
                             </div>
                             <div class="col-xs-4">
-                            <a {{#if yelp}} href="{{yelp}}" class="btn" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
+                            <a {{#if yelp}} href="{{yelp}}" class="btn review-link" {{else}} href="#" style="cursor: default;" {{/if}} rel="noopener">
                               <label style="display: block;"><b>Yelp</b></label>
                                <div class="img-thumbnail">
                                   <img src="https://cdn.worldvectorlogo.com/logos/yelp-icon.svg" alt="Yelp Image" class="img-responsive" style="height: 300px;">
@@ -68,5 +68,30 @@
         </footer>
 </div>
 
-<!-- Review page methods 
-<script src="assets/js/review.js"></script>-->
+<!-- Review page methods -->
+<script type="text/javascript">
+  // Check if this user has already left a review and if not then initialize its status
+  $.get("/api/fetch_contact_data/" + $("#positive-review").attr("data-contact"))
+  .done(function(res) {
+    if(res.status != 2) {
+      // Since Contact opened the link from the email
+      // We update Contact's status to 3 (3: the contact opened but did not leave a review)
+      $.post("/api/fetch_contact_data/update", 
+      {
+        id: $("#positive-review").attr("data-contact"),
+        status: 3
+      });
+    }
+  });
+
+  // Attach a click listener to the links that exists
+  $(".review-link").on("click", function() {
+    // Since an external link for review was clicked,
+    // we update the Contact's status to 2 (2: the contact submitted a review)
+    $.post("/api/fetch_contact_data/update", 
+    {
+      id: $("#positive-review").attr("data-contact"),
+      status: 2
+    });
+  })
+</script>
