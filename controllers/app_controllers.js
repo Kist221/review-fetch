@@ -1,5 +1,6 @@
 // Require dependencies
 var express = require("express");
+var formidable = require('formidable');
 var passport = require("../config/passport");
 var router = express.Router();
 // Requiring bcrypt for password hashing. Using the bcrypt-nodejs version as the regular bcrypt module
@@ -10,6 +11,9 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var db = require("../models");
 // Require our emailer function
 const NewEmail = require("../email");
+var parse = require('csv-parse');
+var fs = require('fs');
+
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -51,7 +55,54 @@ router.post("/api/signup", function(req, res) {
 // This will return the current user login
 router.post("/api/currentUser", function(req, res) {
   res.json(req.user);
-})
+});
+
+// Parse an uploaded CSV file and save data as Contacts
+router.post("/api/uploadcsv", function(req, res) {
+  var form = new formidable.IncomingForm();
+  var csvFilePath = "";
+  var newUserData = {};
+
+  // Find the ComapnyId of the current User's Company.
+  // We need this to associate a Contact to a Company
+  db.Company.findOne({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(function(dbCompany) {
+    newUserData.CompanyId = dbCompany.id;
+  });
+
+  form.parse(req);
+
+  form.on('fileBegin', function (name, file){
+      file.path = __dirname + '/uploads/' + file.name;
+      csvFilePath = file.path;
+  });
+
+  form.on('file', function (name, file){
+    console.log('Uploaded ' + file.name);
+    var parser = parse({"columns": true}, function(err, data){
+      // Print error if there is one
+      if(err) {
+        console.log(err);
+      }
+      // Iterate through each data (or row) in the csv and store it as a Contact
+      for(var i = 0; i < data.length; i++) {
+        newUserData.name = data[i].first_name.trim() + " " + data[i].last_name.trim();
+        newUserData.email = data[i].email.trim();
+        newUserData.phone = data[i].phone1.trim();
+        // This is where we create our new Contact
+        db.Contact.create(newUserData);
+      }
+      // Redirect the User to the list of Contact once csv data is uploaded to DB
+      res.redirect("/contacts");
+    });
+
+    fs.createReadStream(csvFilePath).pipe(parser);
+  });
+});
 
 // Route for login page
 router.get("/login", function(req, res) {
@@ -150,6 +201,11 @@ router.get("/contacts", isAuthenticated, function(req, res) {
       res.render("contact-list", {contacts: dbContact});
     });
   });
+});
+
+// Import Contact Page
+router.get("/import", isAuthenticated, function(req, res) {
+  res.render("upload");
 });
 
 // Sends an email with options defined in the req.body
