@@ -84,12 +84,12 @@
                                 <h4 class="title">Import Contacts by CSV</h4>
                             </div>
                             <div class="content">
-                                <form action="/api/uploadcsv" enctype="multipart/form-data" method="post">
+                                <form id="upload-form" action="/api/uploadcsv" enctype="multipart/form-data" method="post">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Select your file:</label>
-                                                <input type="file" name="upload" multiple>
+                                                <input id="input-file" type="file" name="upload" accept=".csv" multiple>
                                             </div>
                                         </div>
                                     </div>
@@ -140,3 +140,67 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    type = ['','info','success','warning','danger'];
+    
+    importFunctions = {
+        showNotification: function(from, align, message, color, icon){
+
+            $.notify({
+                icon: icon,
+                message: "<b>" + message + "</b>"
+            },{
+                type: type[color],
+                timer: 1000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
+        }
+    };
+
+    // List of available valid file types
+    var fileTypes = [
+      'csv',
+      'application/vnd.ms-excel'
+    ];
+
+    // This function determines if the file passed in is a valid file type
+    function validFileType(file) {
+      for(var i = 0; i < fileTypes.length; i++) {
+        // If a valid file type then return true
+        if(file.type === fileTypes[i]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Handle form submit and do some file validation
+    $("#upload-form").on("submit", function(event) {
+        var input = document.querySelector('input');
+        var currentFiles = input.files;
+        var error = false;
+
+        // Check if there is a file selected
+        if(currentFiles.length === 0) {
+            // Display no file selected error
+            importFunctions.showNotification('bottom','center', "No file selected for upload.", 3, "ti-info");
+            // Set error to true
+            error = true;
+        }
+        // Check for proper file type 
+        else if(!validFileType(currentFiles[0])) {
+            // Display invalid file type error
+            importFunctions.showNotification('bottom','center', "Not a valid file type.", 4, "ti-na");
+            // Set error to true
+            error = true;
+        }
+        // If there is an error then prevent the form from being submitted
+        if(error) {
+            event.preventDefault();
+        }
+    });
+</script>
