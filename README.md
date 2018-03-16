@@ -62,7 +62,7 @@ The current abilities of Review Fetch consist of:
 
 * Managing templates for fetching contacts reviews
 
-![https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Manage_Templates.gif](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Manage_Templates.gif)
+![Demo](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Manage_Templates.gif)
 
 * Soliciting feedback from a business contact
 
