@@ -52,21 +52,13 @@ The current abilities of Review Fetch consist of:
 
 ## Demos
 
-* Creating a user account for your Business
+![Creating a user account for your Business](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Create_User.gif)
 
-![https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Create_User.gif](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Create_User.gif)
+![ Adding new business contacts](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Add_Contact.gif)
 
-* Adding new business contacts
+![Managing templates for fetching contacts reviews](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Manage_Templates.gif)
 
-![https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Add_Contact.gif](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Add_Contact.gif)
-
-* Managing templates for fetching contacts reviews
-
-![* Managing templates for fetching contacts reviews](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Manage_Templates.gif)
-
-* Soliciting feedback from a business contact
-
-![https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Fetch_Review.gif](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Fetch_Review.gif)
+![Soliciting feedback from a business contact](https://github.com/Kist221/review-fetch/tree/master/public/assets/gifs/Fetch_Review.gif)
 
 ### Authors
 
