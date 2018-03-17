@@ -2,7 +2,7 @@
 
 Welcome to review-fetch. Widely known as 'Review Fetch'©™.
 
-This customizable application allows for companies to take control of their longterm success by encouraging feedback, building a good reputation, and building brand awareness. All key factors for a successful business to grow and retain a loyal customer base.
+This customizable application allows for companies to take control of their longterm success by encouraging feedback, building a good reputation, and cultivating brand awareness. All key factors for a successful business to grow referral business and retain a loyal customer base.
 
 ## Functionality & Features
 
