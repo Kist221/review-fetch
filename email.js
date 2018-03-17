@@ -25,14 +25,17 @@ var sendEmailTemplate = transporter.templateSender(
     });
 
 // Export emailer function
-exports.sendEmail = function (email, subject, id, name, message) {
+exports.sendEmail = function (email, subject, id, name, message, twitter, instagram, facebook) {
     sendEmailTemplate({
         to: email,
         subject: subject
     }, {
         id: id,
         name: name,
-        message: message
+        message: message,
+        twitter: twitter,
+        instagram: instagram,
+        facebook: facebook
     }, function (err, info) {
         if (err) {
             console.log(err)
