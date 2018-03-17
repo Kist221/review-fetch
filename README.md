@@ -52,13 +52,21 @@ The current abilities of Review Fetch consist of:
 
 ## Demos
 
+##### Step 1 - Create a user account for your Business
+
 ![Creating a user account for your Business](/demo/Create_User.gif)
+
+##### Step 2 - Add new business contacts
 
 ![ Adding new business contacts](/demo/Add_Contact.gif)
 
+##### Step 3 - Manage templates for fetching contacts reviews
+
 ![Managing templates for fetching contacts reviews](/demo/Manage_Templates.gif)
 
-![Soliciting feedback from a business contact](/demo/gifs/Fetch_Review.gif)
+##### Step 4 - Solicit feedback from a business contact
+
+![Soliciting feedback from a business contact](/demo/Fetch_Review.gif)
 
 ### Authors
 
