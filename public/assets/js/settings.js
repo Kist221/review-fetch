@@ -93,7 +93,7 @@ $(document).ready(function(){
 	});
 
 	// Display the amount of templates this company has
-	$.get("/api/fetch_templates", function() {
+	$.get("/api/fetch_company_templates", function() {
 		console.log("getting Templates...");
 	}).done(function(res){
 		console.log(res.length);

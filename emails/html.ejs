@@ -312,10 +312,25 @@ Line 282 for message
                                                                         <td align="center">
                                                                             <table border="0" cellspacing="0" cellpadding="0">
                                                                                 <tr>
-                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/PZeWpIm2TkSqtS6i07xE_ico_facebook.jpg" border="0" width="28" height="28" alt="" /></a></td>
-                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/hAIPhWl2SB2cL0Atc4lB_ico_twitter.jpg" border="0" width="28" height="28" alt="" /></a></td>
-                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/NrXUpqcRQwKnJKzLkqS1_ico_instagram.jpg" border="0" width="28" height="28" alt="" /></a></td>
-                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/VaewiS8gT5ClCCR9vAO1_ico_pinterest.jpg" border="0" width="28" height="28" alt="" /></a></td>
+                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a <% if(facebook) { %>
+                                                                                        href="https://www.facebook.com/<%= facebook %>" target="_blank"
+                                                                                        <% } else {%>
+                                                                                        href="#"
+                                                                                        <% } %>
+                                                                                        ><img src="https://d1pgqke3goo8l6.cloudfront.net/PZeWpIm2TkSqtS6i07xE_ico_facebook.jpg" border="0" width="28" height="28" alt="" /></a></td>
+                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a <% if(twitter) { %>
+                                                                                        href="https://twitter.com/<%= twitter %>" target="_blank"
+                                                                                        <% } else {%>
+                                                                                        href="#"
+                                                                                        <% } %>
+                                                                                        ><img src="https://d1pgqke3goo8l6.cloudfront.net/hAIPhWl2SB2cL0Atc4lB_ico_twitter.jpg" border="0" width="28" height="28" alt="" /></a></td>
+                                                                                    <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a <% if(instagram) { %>
+                                                                                        href="https://www.instagram.com/<%= instagram %>" target="_blank"
+                                                                                        <% } else {%>
+                                                                                        href="#"
+                                                                                        <% } %>
+                                                                                        ><img src="https://d1pgqke3goo8l6.cloudfront.net/NrXUpqcRQwKnJKzLkqS1_ico_instagram.jpg" border="0" width="28" height="28" alt="" /></a></td>
+                                                                                    <!-- <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center" width="38"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/VaewiS8gT5ClCCR9vAO1_ico_pinterest.jpg" border="0" width="28" height="28" alt="" /></a></td> -->
                                                                                 </tr>
                                                                             </table>
                                                                         </td>

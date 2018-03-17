@@ -213,8 +213,19 @@ router.get("/import", isAuthenticated, function(req, res) {
 // Sends an email with options defined in the req.body
 router.post("/api/send_email", function(req, res) {
   var data = req.body;
-  NewEmail.sendEmail(data.to, data.subject ,data.id, data.name, data.message);
-  res.json(data);
+
+  db.Company.findOne({
+      where: {
+        UserId: req.user.id
+      },
+      include: [db.Contact]
+    }).then(function(dbCompany) {
+      data.twitter = dbCompany.twitter;
+      data.instagram = dbCompany.instagram;
+      data.facebook = dbCompany.facebook;
+      NewEmail.sendEmail(data.to, data.subject ,data.id, data.name, data.message, data.twitter, data.instagram, data.facebook);
+      res.json(data);
+    });
 });
 
 /**********************
