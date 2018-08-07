@@ -1,30 +1,36 @@
 // requirements
-var express = require("express");
-var bodyParser = require("body-parser");
-var session = require("express-session");
-var passport = require("./config/passport");
-var exphbs = require("express-handlebars");
-var routes = require("./controllers/app_controllers.js");
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const passport = require('./config/passport');
+const routes = require('./controllers/app_controllers.js');
 // server PORT
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 // Requiring our models for syncing
-var db = require("./models");
+const db = require('./models');
 // start express
-var app = express();
+const app = express();
 
 // configure handlebars template
-app.engine("handlebars", exphbs({
- helpers: require('./views/helpers/handlebars.js'),
- defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.engine(
+  'handlebars',
+  exphbs({
+    helpers: require('./views/helpers/handlebars.js'),
+    defaultLayout: 'main',
+  })
+);
+app.set('view engine', 'handlebars');
 // URL parser
 app.use(bodyParser.urlencoded({ extended: false }));
 // json parser
 app.use(bodyParser.json());
 // serve static content from the "public" directory
-app.use(express.static("public"));
+app.use(express.static('public'));
 // We need to use sessions to keep track of our user's login status
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 // Give the server access to routes
@@ -33,10 +39,10 @@ app.use(routes);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 // Add {force: true} inside of sync to resolve DB/model changes
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`App listening on PORT ${PORT}`);
   });
 });
 
-module.exports = app;  // for testing
+module.exports = app; // for testing

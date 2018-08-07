@@ -1,31 +1,31 @@
 module.exports = function(sequelize, DataTypes) {
-  var Contact = sequelize.define("Contact", {
+  const Contact = sequelize.define('Contact', {
     // Giving the Contact model a name of type STRING
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     // Giving the Contact model a name of type BOOLEAN
     gender: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
     },
     // Giving the Contact model an email of type STRING
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     // Giving the Contact model a phone of type STRING
     phone: {
       type: DataTypes.STRING,
       validate: {
-        len:[10,20]
-      }
+        len: [10, 20],
+      },
     },
 
     // status - 0: a review request was not sent
@@ -34,16 +34,16 @@ module.exports = function(sequelize, DataTypes) {
     // status - 3: the contact opened but did not leave a review
     status: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 0,
     },
 
     // is the contact still active
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
     },
 
-     // the contacts review
+    // the contacts review
     review: {
       type: DataTypes.TEXT,
     },
@@ -51,9 +51,8 @@ module.exports = function(sequelize, DataTypes) {
     // review type 0: negative review, 1: positive review
     reviewType: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
-
   });
 
   Contact.associate = function(models) {
@@ -61,11 +60,10 @@ module.exports = function(sequelize, DataTypes) {
     // A Contact can't be created without a Company due to the foreign key constraint
     Contact.belongsTo(models.Company, {
       foreignKey: {
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   };
 
   return Contact;
 };
-
